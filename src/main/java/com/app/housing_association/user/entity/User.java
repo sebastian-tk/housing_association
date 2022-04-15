@@ -23,8 +23,8 @@ import static javax.validation.constraints.Pattern.Flag.CASE_INSENSITIVE;
 @Table(name = "users")
 public class User extends BaseEntity<Long> {
 
-    @NotBlank(message = "{user.name.blank}")
-    private String name;
+    @NotBlank(message = "{user.username.blank}")
+    private String username;
 
     @Email(regexp = "user.email.validation.regexp", flags = CASE_INSENSITIVE)
     @NotBlank(message = "{user.email.blank}")

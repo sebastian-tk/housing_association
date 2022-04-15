@@ -26,12 +26,12 @@ public class User extends BaseEntity<Long> {
     @NotBlank(message = "{user.name.blank}")
     private String name;
 
-    @Email(regexp = "user.email.validation.regexp",flags = CASE_INSENSITIVE )
+    @Email(regexp = "user.email.validation.regexp", flags = CASE_INSENSITIVE)
     @NotBlank(message = "{user.email.blank}")
     private String email;
 
-    @NotBlank
-    private String password;
+    @NotBlank(message = "{user.password.blank`}")
+    private char[] password;
 
     @NonNull
     @Enumerated(EnumType.STRING)

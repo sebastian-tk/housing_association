@@ -1,6 +1,6 @@
 package com.app.housing_association.user.entity;
 
-import com.app.housing_association.common.entity.BaseEntity;
+import com.app.housing_association.common.model.BaseEntity;
 import com.app.housing_association.user.entity.enums.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

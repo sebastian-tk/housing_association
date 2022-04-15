@@ -1,7 +1,7 @@
 package com.app.housing_association.common.service;
 
 
-import com.app.housing_association.common.entity.BaseEntity;
+import com.app.housing_association.common.model.BaseEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;

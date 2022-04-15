@@ -1,4 +1,4 @@
-package com.app.housing_association.common.entity;
+package com.app.housing_association.common.model;
 
 import lombok.Getter;
 import lombok.Setter;

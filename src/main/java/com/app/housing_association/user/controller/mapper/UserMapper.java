@@ -12,7 +12,7 @@ import org.mapstruct.Mapping;
 public interface UserMapper extends GenericMapper<User,UserDto,Long> {
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
+    @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "password", target = "password")
     @Mapping(source = "role", target = "role")
@@ -23,4 +23,11 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @InheritInverseConfiguration(name = "toEntity")
     @Override
     UserDto toDto(User entity);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "password", target = "password")
+    @BeanMapping(ignoreByDefault = true)
+    UserDto toRegisteredDto(User entity);
 }

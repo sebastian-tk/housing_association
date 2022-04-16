@@ -16,6 +16,6 @@ import lombok.experimental.SuperBuilder;
 public class UserDto extends BaseDto<Long> {
     private String username;
     private String email;
-    private char[] password;
+    private String password;
     private Role role;
 }

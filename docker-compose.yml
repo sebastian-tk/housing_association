@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  db_mysql:
+    image: mysql:latest
+    volumes:
+      - db_mysql:/var/lib/mysql
+    restart: always
+    container_name: db_cont
+    environment:
+      MYSQL_DATABASE: 'association_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user1234'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_TCP_PORT: '3307'
+    ports:
+      - '3307:3307'
+    expose:
+      - '3307'
+    networks:
+      - 'ha_network'
+volumes:
+  db_mysql:
+
+networks:
+  ha_network:

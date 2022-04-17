@@ -1,0 +1,18 @@
+
+###
+POST localhost:8080/registration
+Content-Type: application/json
+
+{
+  "username":"admin1",
+  "email":"admin1@gmail.com",
+  "password":"admin1234"
+}
+
+###
+GET localhost:8080/users
+Authorization: Basic admin1 admin1234
+
+###
+GET localhost:8080/users/1
+Authorization: Basic admin1 admin1234

@@ -20,6 +20,7 @@
 
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <lombok.version>1.18.22</lombok.version>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
     <dependencies>
@@ -67,6 +68,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>

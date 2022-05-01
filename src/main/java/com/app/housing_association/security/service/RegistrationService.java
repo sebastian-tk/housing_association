@@ -11,13 +11,13 @@ import java.util.Optional;
 import static com.app.housing_association.user.entity.enums.Role.ADMIN;
 
 @Service
-public class UserAdminService {
+public class RegistrationService {
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserAdminService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

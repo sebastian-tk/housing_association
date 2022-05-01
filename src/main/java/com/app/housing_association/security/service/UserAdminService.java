@@ -1,4 +1,4 @@
-package com.app.housing_association.security.registration.service;
+package com.app.housing_association.security.service;
 
 import com.app.housing_association.security.model.AdminRegistrationData;
 import com.app.housing_association.user.entity.User;

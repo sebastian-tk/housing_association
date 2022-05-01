@@ -1,6 +1,6 @@
-package com.app.housing_association.security.login.service;
+package com.app.housing_association.security.service;
 
-import com.app.housing_association.security.login.model.AppUserDetails;
+import com.app.housing_association.security.model.AppUserDetails;
 import com.app.housing_association.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

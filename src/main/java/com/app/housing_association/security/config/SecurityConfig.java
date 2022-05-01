@@ -1,8 +1,8 @@
 package com.app.housing_association.security.config;
 
-import com.app.housing_association.security.login.service.AppUserDetailsService;
-import com.app.housing_association.security.login.utils.AuthEntryPointJwt;
-import com.app.housing_association.security.login.utils.AuthTokenFilter;
+import com.app.housing_association.security.service.AppUserDetailsService;
+import com.app.housing_association.security.utils.AuthEntryPointJwt;
+import com.app.housing_association.security.utils.AuthTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
-package com.app.housing_association.security.login.utils;
+package com.app.housing_association.security.utils;
 
-import com.app.housing_association.security.login.service.AppUserDetailsService;
+import com.app.housing_association.security.service.AppUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import static com.app.housing_association.security.login.utils.JwtUtils.TOKEN_HEADER;
-import static com.app.housing_association.security.login.utils.JwtUtils.TOKEN_PREFIX;
 
 @Component
 @RequiredArgsConstructor
@@ -51,8 +48,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     }
 
     private String parseJwt(HttpServletRequest request) {
-        String headerAuth = request.getHeader(TOKEN_HEADER);
-        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith(TOKEN_PREFIX)) {
+        String headerAuth = request.getHeader(JwtUtils.TOKEN_HEADER);
+        if (StringUtils.hasText(headerAuth) && headerAuth.startsWith(JwtUtils.TOKEN_PREFIX)) {
             return headerAuth.substring(7);
         }
         return null;

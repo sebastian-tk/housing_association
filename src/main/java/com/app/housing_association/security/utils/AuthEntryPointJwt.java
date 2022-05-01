@@ -1,4 +1,4 @@
-package com.app.housing_association.security.login.utils;
+package com.app.housing_association.security.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

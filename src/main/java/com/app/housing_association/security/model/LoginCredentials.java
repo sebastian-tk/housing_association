@@ -1,4 +1,4 @@
-package com.app.housing_association.security.login.model;
+package com.app.housing_association.security.model;
 
 import lombok.Getter;
 import lombok.Setter;

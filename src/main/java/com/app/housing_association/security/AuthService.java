@@ -1,9 +1,9 @@
 package com.app.housing_association.security;
 
-import com.app.housing_association.security.login.utils.JwtUtils;
-import com.app.housing_association.security.login.model.AppUserDetails;
-import com.app.housing_association.security.login.model.LoggedUser;
-import com.app.housing_association.security.login.model.LoginCredentials;
+import com.app.housing_association.security.utils.JwtUtils;
+import com.app.housing_association.security.model.AppUserDetails;
+import com.app.housing_association.security.model.LoggedUser;
+import com.app.housing_association.security.model.LoginCredentials;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

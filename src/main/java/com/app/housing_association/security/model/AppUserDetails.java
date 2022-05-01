@@ -1,4 +1,4 @@
-package com.app.housing_association.security.login.model;
+package com.app.housing_association.security.model;
 
 import com.app.housing_association.user.entity.User;
 import lombok.RequiredArgsConstructor;

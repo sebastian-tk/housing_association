@@ -1,6 +1,6 @@
 package com.app.housing_association.security.registration.service;
 
-import com.app.housing_association.security.registration.model.AdminRegistrationData;
+import com.app.housing_association.security.model.AdminRegistrationData;
 import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;

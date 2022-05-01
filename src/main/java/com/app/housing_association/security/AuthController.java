@@ -2,7 +2,7 @@ package com.app.housing_association.security;
 
 import com.app.housing_association.security.model.LoggedUser;
 import com.app.housing_association.security.model.LoginCredentials;
-import com.app.housing_association.security.registration.model.AdminRegistrationData;
+import com.app.housing_association.security.model.AdminRegistrationData;
 import com.app.housing_association.security.registration.service.UserAdminService;
 import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.controller.mapper.UserMapper;

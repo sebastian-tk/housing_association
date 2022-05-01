@@ -1,4 +1,4 @@
-package com.app.housing_association.security;
+package com.app.housing_association.security.service;
 
 import com.app.housing_association.security.utils.JwtUtils;
 import com.app.housing_association.security.model.AppUserDetails;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class LoginService {
 
     private final AuthenticationManager authenticationManager;
 

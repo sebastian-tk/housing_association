@@ -1,6 +1,6 @@
-package com.app.housing_association.security.registration.service;
+package com.app.housing_association.security.service;
 
-import com.app.housing_association.security.registration.model.AdminRegistrationData;
+import com.app.housing_association.security.model.AdminRegistrationData;
 import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,13 +11,13 @@ import java.util.Optional;
 import static com.app.housing_association.user.entity.enums.Role.ADMIN;
 
 @Service
-public class UserAdminService {
+public class RegistrationService {
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserAdminService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public RegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }

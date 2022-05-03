@@ -1,4 +1,4 @@
-package com.app.housing_association.security.login.model;
+package com.app.housing_association.security.model;
 
 import com.app.housing_association.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +11,7 @@ import java.util.Collection;
 import static java.util.Collections.singletonList;
 
 @RequiredArgsConstructor
-public class UserEntityDetails implements UserDetails {
+public class AppUserDetails implements UserDetails {
 
     private final User user;
 
@@ -52,4 +52,9 @@ public class UserEntityDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
+
 }

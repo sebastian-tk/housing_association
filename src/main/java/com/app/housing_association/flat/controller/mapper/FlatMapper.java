@@ -3,6 +3,8 @@ package com.app.housing_association.flat.controller.mapper;
 import com.app.housing_association.building.controller.dto.BuildingDto;
 import com.app.housing_association.building.entity.Building;
 import com.app.housing_association.common.controller.mapper.GenericMapper;
+import com.app.housing_association.contract.controller.dto.ContractDto;
+import com.app.housing_association.contract.entity.Contract;
 import com.app.housing_association.flat.controller.dto.FlatDto;
 import com.app.housing_association.flat.entity.Flat;
 import org.mapstruct.BeanMapping;
@@ -16,10 +18,11 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
     @Mapping(source = "id", target = "id")
     @Mapping(source = "storey", target = "storey")
     @Mapping(source = "number", target = "number")
-    @Mapping(source = "type", target = "type")
+    @Mapping(source = "nrStaircase", target = "nrStaircase")
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "typeUse", target = "typeUse")
     @Mapping(source = "building", target = "building")
+    @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     @Override
     Flat toEntity(FlatDto dto);
@@ -38,4 +41,12 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
 
     @InheritInverseConfiguration(name="createBuildingDto")
     Building createBuildingEntity(BuildingDto dto);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "type", target = "type")
+    @BeanMapping(ignoreByDefault = true)
+    ContractDto createContractDto(Contract entity);
+
+    @InheritInverseConfiguration(name="createContractDto")
+    Contract createContractEntity(ContractDto dto);
 }

@@ -30,18 +30,18 @@ public class Rate extends BaseEntity<Long> {
 
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    @Column(name = "maintenance_m2", precision = 5,scale = 2)
+    @Column(name = "renovation_found_m2", precision = 5,scale = 2)
     private BigDecimal renovationFundM2;
 
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    @Column(name = "flat_rent_m2", precision = 5,scale = 2)
-    private BigDecimal flatRentM2;
+    @Column(name = "rent_rent_m2", precision = 5,scale = 2)
+    private BigDecimal rentRentM2;
 
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
-    @Column(name = "service_rent_m2", precision = 5,scale = 2)
-    private BigDecimal serviceRentM2;
+    @Column(name = "rent_property_m2", precision = 5,scale = 2)
+    private BigDecimal rentPropertyM2;
 
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)

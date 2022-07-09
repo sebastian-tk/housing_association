@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FlatBasicService extends AbstractCrudService<Flat, Long> implements FlatService {
 
-    public FlatBasicService(FlatRepository buildingRepository) {
-        super(buildingRepository);
+    public FlatBasicService(FlatRepository flatRepository) {
+        super(flatRepository);
     }
 }

@@ -29,9 +29,10 @@ public class LoginService {
 
     public LoggedUser getLoggedUser(Authentication authentication){
         AppUserDetails userDetails = (AppUserDetails) authentication.getPrincipal();
+        var x = jwtUtils.generateJwtToken(authentication);
         return new LoggedUser(
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                jwtUtils.generateJwtToken(authentication));
+                x);
     }
 }

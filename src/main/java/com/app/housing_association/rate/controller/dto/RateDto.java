@@ -18,8 +18,8 @@ public class RateDto extends BaseDto<Long> {
 
     private BigDecimal heatingM2;
     private BigDecimal renovationFundM2;
-    private BigDecimal flatRentM2;
-    private BigDecimal serviceRentM2;
+    private BigDecimal rentRentM2;
+    private BigDecimal rentPropertyM2;
     private BigDecimal exploitationM2;
     private BigDecimal administrationM2;
     private BigDecimal warmWaterPer;

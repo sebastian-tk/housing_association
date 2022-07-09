@@ -20,10 +20,12 @@ public class BuildingDto extends BaseDto<Long> {
     private String name;
     private String town;
     private String street;
-    private Integer number;
+    private String number;
     private String zipCode;
     private Integer yearConstruction;
     private Integer areaM2;
     private Integer numberStoreys;
+    private Integer flatsPerStoreys;
+    private Integer staircase;
     private Set<FlatDto> flats;
 }

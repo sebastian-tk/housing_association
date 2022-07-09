@@ -42,7 +42,7 @@ public class Building extends BaseEntity<Long> {
     private String zipCode;
 
     @NotNull
-    @Column(name = "year_contruction")
+    @Column(name = "year_construction")
     private Integer yearConstruction;
 
     @NotNull
@@ -55,6 +55,14 @@ public class Building extends BaseEntity<Long> {
     @Column(name = "number_storeys")
     private Integer numberStoreys;
 
+    @NotNull
+    @Size(min = 1,max = 10)
+    @Column(name = "flats_per_storey")
+    private Integer flatsPerStorey;
+
+    @NotNull
+    @Size(min = 1,max = 10)
+    private Integer staircase;
 
     @OneToMany(
             mappedBy = "building",

@@ -12,6 +12,7 @@ import java.util.Collections;
 @Mapper(componentModel = "spring", imports = Collections.class)
 public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Long> {
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "name", target = "name")
     @Mapping(source = "town", target = "town")
     @Mapping(source = "street", target = "street")
@@ -20,6 +21,8 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(source = "yearConstruction", target = "yearConstruction")
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "numberStoreys", target = "numberStoreys")
+    @Mapping(source = "flatsPerStoreys", target = "flatsPerStoreys")
+    @Mapping(source = "staircase", target = "staircase")
     @Mapping(
             target = "flats",
             nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,

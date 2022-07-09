@@ -13,10 +13,11 @@ import java.util.Collections;
 @Mapper(componentModel = "spring", imports = Collections.class)
 public interface RateMapper extends GenericMapper<Rate, RateDto, Long> {
 
+    @Mapping(source = "id", target = "id")
     @Mapping(source = "heatingM2", target = "heatingM2")
     @Mapping(source = "renovationFundM2", target = "renovationFundM2")
-    @Mapping(source = "flatRentM2", target = "flatRentM2")
-    @Mapping(source = "serviceRentM2", target = "serviceRentM2")
+    @Mapping(source = "rentRentM2", target = "rentRentM2")
+    @Mapping(source = "rentPropertyM2", target = "rentPropertyM2")
     @Mapping(source = "exploitationM2", target = "exploitationM2")
     @Mapping(source = "administrationM2", target = "administrationM2")
     @Mapping(source = "warmWaterPer", target = "warmWaterPer")

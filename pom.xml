@@ -22,6 +22,7 @@
         <lombok.version>1.18.22</lombok.version>
         <jjwt.version>0.9.1</jjwt.version>
         <openapi.version>1.6.4</openapi.version>
+        <flyway.version>8.5.0</flyway.version>
     </properties>
 
     <dependencies>
@@ -79,7 +80,16 @@
             <artifactId>jjwt</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+            <version>${flyway.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -2,15 +2,13 @@ package com.app.housing_association.user.entity;
 
 import com.app.housing_association.common.model.BaseEntity;
 import com.app.housing_association.common.utils.IValidation;
+import com.app.housing_association.contract.entity.Contract;
 import com.app.housing_association.user.entity.enums.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -39,5 +37,9 @@ public class User extends BaseEntity<Long> {
     @NotNull()
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Contract contract;
 
 }

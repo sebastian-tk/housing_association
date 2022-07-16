@@ -1,6 +1,7 @@
 package com.app.housing_association.user.controller.dto;
 
 import com.app.housing_association.common.model.BaseDto;
+import com.app.housing_association.contract.controller.dto.ContractDto;
 import com.app.housing_association.user.entity.enums.Role;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

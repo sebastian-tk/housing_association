@@ -28,5 +28,6 @@ public class FeeDto extends BaseDto<Long> {
     private BigDecimal coldWater;
     private BigDecimal sewage;
     private BigDecimal rubbish;
+    private BigDecimal total;
     private ContractDto contract;
 }

@@ -36,6 +36,9 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "role", target = "role")
+    @Mapping(source = "password", target = "password")
     @BeanMapping(ignoreByDefault = true)
     User createUser(UserDto dto);
 
@@ -43,8 +46,6 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     UserDto createUserDto(User entity);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "number", target = "number")
-    @Mapping(source = "building", target = "building")
     @BeanMapping(ignoreByDefault = true)
     Flat createFlat(FlatDto dto);
 
@@ -52,10 +53,6 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     FlatDto createFlatDto(Flat entity);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "name", target = "name")
-    @Mapping(source = "town", target = "town")
-    @Mapping(source = "street", target = "street")
-    @Mapping(source = "number", target = "number")
     @BeanMapping(ignoreByDefault = true)
     Building createBuilding(BuildingDto dto);
 
@@ -63,6 +60,16 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     BuildingDto createBuildingDto(Building entity);
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "heating", target = "heating")
+    @Mapping(source = "renovationFund", target = "renovationFund")
+    @Mapping(source = "rent", target = "rent")
+    @Mapping(source = "exploitation", target = "exploitation")
+    @Mapping(source = "administration", target = "administration")
+    @Mapping(source = "warmWater", target = "warmWater")
+    @Mapping(source = "coldWater", target = "coldWater")
+    @Mapping(source = "sewage", target = "sewage")
+    @Mapping(source = "rubbish", target = "rubbish")
+    @Mapping(source = "total", target = "total")
     @BeanMapping(ignoreByDefault = true)
     Fee createFee(FeeDto dto);
 

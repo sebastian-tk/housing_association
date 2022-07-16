@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.Instant;
@@ -26,7 +27,7 @@ public class Contract extends BaseEntity<Long> {
    private ContractType type;
 
    @NotNull
-   @Size(min = 1)
+   @Min(1)
    @Column(name = "amount_people")
    private Integer amountPeople;
 
@@ -37,15 +38,15 @@ public class Contract extends BaseEntity<Long> {
    @Column(name = "finish_time")
    private Instant finishTime;
 
-   @OneToOne
+   @OneToOne(cascade = {CascadeType.ALL})
    @JoinColumn(name = "user_id")
    private User user;
 
-   @OneToOne
+   @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
    @JoinColumn(name = "flat_id")
    private Flat flat;
 
-   @OneToOne
+   @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "fee_id")
    private Fee fee;
 

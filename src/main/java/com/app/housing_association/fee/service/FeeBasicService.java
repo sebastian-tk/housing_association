@@ -8,6 +8,7 @@ import com.app.housing_association.fee.repository.FeeRepository;
 import com.app.housing_association.rate.entity.Rate;
 import com.app.housing_association.rate.service.RateService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,6 +32,7 @@ public class FeeBasicService extends AbstractCrudService<Fee, Long> implements F
         this.rateService = rateService;
     }
 
+    @Transactional
     @Override
     public Fee calculateAndSaveFeeByData(DataForCalculationFee data) {
         if (isNull(data)) {
@@ -54,6 +56,7 @@ public class FeeBasicService extends AbstractCrudService<Fee, Long> implements F
         fee.setColdWater(rates.getColdWaterPer().multiply(amountPeople).setScale(CALCULATION_SCALE, CALCULATION_ROUNDING_MODE));
         fee.setSewage(rates.getSewagePer().multiply(amountPeople).setScale(CALCULATION_SCALE, CALCULATION_ROUNDING_MODE));
         fee.setRubbish(rates.getRubbishPer().multiply(amountPeople).setScale(CALCULATION_SCALE, CALCULATION_ROUNDING_MODE));
+        fee.setTotal(calculateTotal(fee));
         return fee;
     }
 
@@ -67,5 +70,17 @@ public class FeeBasicService extends AbstractCrudService<Fee, Long> implements F
         return type == LEASE_AGREEMENT ?
                 m2.multiply(rentRentFactor).setScale(CALCULATION_SCALE, CALCULATION_ROUNDING_MODE)
                 : m2.multiply(rentPropertyFactor).setScale(CALCULATION_SCALE, CALCULATION_ROUNDING_MODE);
+    }
+
+    private BigDecimal calculateTotal(Fee fee){
+        return fee.getHeating()
+                .add(fee.getRenovationFund())
+                .add(fee.getRent())
+                .add(fee.getExploitation())
+                .add(fee.getAdministration())
+                .add(fee.getWarmWater())
+                .add(fee.getColdWater())
+                .add(fee.getSewage())
+                .add(fee.getRubbish());
     }
 }

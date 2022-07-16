@@ -25,7 +25,7 @@ public class BuildingDto extends BaseDto<Long> {
     private Integer yearConstruction;
     private Integer areaM2;
     private Integer numberStoreys;
-    private Integer flatsPerStoreys;
+    private Integer flatsPerStorey;
     private Integer staircase;
     private Set<FlatDto> flats;
 }

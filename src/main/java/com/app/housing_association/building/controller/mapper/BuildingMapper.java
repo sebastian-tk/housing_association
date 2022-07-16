@@ -21,7 +21,7 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(source = "yearConstruction", target = "yearConstruction")
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "numberStoreys", target = "numberStoreys")
-    @Mapping(source = "flatsPerStoreys", target = "flatsPerStoreys")
+    @Mapping(source = "flatsPerStorey", target = "flatsPerStorey")
     @Mapping(source = "staircase", target = "staircase")
     @Mapping(
             target = "flats",
@@ -38,7 +38,6 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(source = "id", target = "id")
     @Mapping(source = "storey", target = "storey")
     @Mapping(source = "number", target = "number")
-    @Mapping(source = "type", target = "type")
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "typeUse", target = "typeUse")
     @BeanMapping(ignoreByDefault = true)

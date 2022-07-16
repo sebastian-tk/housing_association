@@ -5,6 +5,9 @@ import com.app.housing_association.building.entity.Building;
 import com.app.housing_association.common.controller.mapper.GenericMapper;
 import com.app.housing_association.contract.controller.dto.ContractDto;
 import com.app.housing_association.contract.entity.Contract;
+import com.app.housing_association.fee.controller.dto.FeeDto;
+import com.app.housing_association.fee.entity.Fee;
+import com.app.housing_association.flat.controller.dto.FlatContractDto;
 import com.app.housing_association.flat.controller.dto.FlatDto;
 import com.app.housing_association.flat.entity.Flat;
 import org.mapstruct.BeanMapping;
@@ -22,7 +25,6 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "typeUse", target = "typeUse")
     @Mapping(source = "building", target = "building")
-    @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     @Override
     Flat toEntity(FlatDto dto);
@@ -43,10 +45,35 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
     Building createBuildingEntity(BuildingDto dto);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "type", target = "type")
+    @Mapping(source = "storey", target = "storey")
+    @Mapping(source = "number", target = "number")
+    @Mapping(source = "nrStaircase", target = "nrStaircase")
+    @Mapping(source = "areaM2", target = "areaM2")
+    @Mapping(source = "typeUse", target = "typeUse")
+    @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
-    ContractDto createContractDto(Contract entity);
+    FlatContractDto toFlatContractDto(Flat entity);
 
-    @InheritInverseConfiguration(name="createContractDto")
-    Contract createContractEntity(ContractDto dto);
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "type", target = "type")
+    @Mapping(source = "amountPeople", target = "amountPeople")
+    @Mapping(source = "startTime", target = "startTime")
+    @Mapping(source = "finishTime", target = "finishTime")
+    @Mapping(source = "fee", target = "fee")
+    @BeanMapping(ignoreByDefault = true)
+    ContractDto toContractDto(Contract contract);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "heating", target = "heating")
+    @Mapping(source = "renovationFund", target = "renovationFund")
+    @Mapping(source = "rent", target = "rent")
+    @Mapping(source = "exploitation", target = "exploitation")
+    @Mapping(source = "administration", target = "administration")
+    @Mapping(source = "warmWater", target = "warmWater")
+    @Mapping(source = "coldWater", target = "coldWater")
+    @Mapping(source = "sewage", target = "sewage")
+    @Mapping(source = "rubbish", target = "rubbish")
+    @Mapping(source = "total", target = "total")
+    @BeanMapping(ignoreByDefault = true)
+    FeeDto toFeeDto(Fee fee);
 }

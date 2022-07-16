@@ -25,6 +25,7 @@ public interface FeeMapper extends GenericMapper<Fee, FeeDto, Long> {
     @Mapping(source = "coldWater", target = "coldWater")
     @Mapping(source = "sewage", target = "sewage")
     @Mapping(source = "rubbish", target = "rubbish")
+    @Mapping(source = "total", target = "total")
     @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     @Override

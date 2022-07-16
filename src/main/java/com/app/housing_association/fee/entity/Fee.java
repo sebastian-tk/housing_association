@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 
@@ -66,6 +63,12 @@ public class Fee extends BaseEntity<Long> {
     @Column(precision = 5, scale = 2)
     private BigDecimal rubbish;
 
-    @OneToOne(mappedBy = "fee")
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = false)
+    @Column(precision = 7, scale = 2)
+    private BigDecimal total;
+
+    @OneToOne(mappedBy = "fee", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @PrimaryKeyJoinColumn
     private Contract contract;
 }

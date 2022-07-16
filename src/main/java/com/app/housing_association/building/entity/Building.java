@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,22 +44,25 @@ public class Building extends BaseEntity<Long> {
     private Integer yearConstruction;
 
     @NotNull
-    @Size(min = 1)
+    @Min(1)
     @Column(name = "area_m2")
     private Integer areaM2;
 
     @NotNull
-    @Size(min = -1,max = 10)
+    @Min(-1)
+    @Max(10)
     @Column(name = "number_storeys")
     private Integer numberStoreys;
 
     @NotNull
-    @Size(min = 1,max = 10)
+    @Min(1)
+    @Max(10)
     @Column(name = "flats_per_storey")
     private Integer flatsPerStorey;
 
     @NotNull
-    @Size(min = 1,max = 10)
+    @Min(1)
+    @Max(10)
     private Integer staircase;
 
     @OneToMany(

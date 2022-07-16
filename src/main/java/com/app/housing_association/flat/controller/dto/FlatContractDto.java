@@ -15,7 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FlatDto extends BaseDto<Long> {
+public class FlatContractDto extends BaseDto<Long> {
 
     private Integer storey;
     private Integer number;
@@ -23,4 +23,5 @@ public class FlatDto extends BaseDto<Long> {
     private Integer areaM2;
     private TypeUse typeUse;
     private BuildingDto building;
+    private ContractDto contract;
 }

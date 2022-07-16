@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Getter
@@ -20,14 +22,15 @@ import javax.validation.constraints.Size;
 public class Flat extends BaseEntity<Long> {
 
     @NotNull
-    @Size(min = -1, max = 10)
+    @Min(-1)
+    @Max(10)
     private Integer storey;
 
     @NotNull
     private Integer number;
 
     @NotNull
-    @Size(min = 1)
+    @Min(1)
     @Column(name = "nr_staircase")
     private Integer nrStaircase;
 

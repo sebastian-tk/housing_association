@@ -38,7 +38,7 @@ public class Contract extends BaseEntity<Long> {
    @Column(name = "finish_time")
    private Instant finishTime;
 
-   @OneToOne(cascade = {CascadeType.ALL})
+   @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
    @JoinColumn(name = "user_id")
    private User user;
 

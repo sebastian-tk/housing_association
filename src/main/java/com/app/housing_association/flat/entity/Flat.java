@@ -35,7 +35,7 @@ public class Flat extends BaseEntity<Long> {
     private Integer nrStaircase;
 
     @NotNull
-    @Size(min = 1)
+    @Min(1)
     @Column(name = "area_m2")
     private Integer areaM2;
 

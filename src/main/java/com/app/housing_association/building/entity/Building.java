@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.app.housing_association.common.utils.IValidation.BUILDING_NUMBER_VALIDATION_REGEXP;
 
@@ -69,13 +72,15 @@ public class Building extends BaseEntity<Long> {
             mappedBy = "building",
             cascade = CascadeType.ALL
     )
-    private Set<Flat> flats = new HashSet<>();
+    private List<Flat> flats = new ArrayList<>();
 
-    public void setFlats(final Set<Flat> flats) {
+    public void setFlats(final List<Flat> flats) {
         this.flats.clear();
-        flats.forEach(user -> {
-            this.flats.add(user);
-            user.setBuilding(this);
+        flats.forEach(flat -> {
+            if(!this.flats.contains(flat)){
+                flat.setBuilding(this);
+                this.flats.add(flat);
+            }
         });
     }
 }

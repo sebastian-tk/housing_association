@@ -26,7 +26,7 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(
             target = "flats",
             nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS,
-            defaultExpression = "java(Collections.emptySet())")
+            defaultExpression = "java(Collections.emptyList())")
     @BeanMapping(ignoreByDefault = true)
     @Override
     Building toEntity(BuildingDto dto);
@@ -40,6 +40,7 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(source = "number", target = "number")
     @Mapping(source = "areaM2", target = "areaM2")
     @Mapping(source = "typeUse", target = "typeUse")
+    @Mapping(source = "nrStaircase", target = "nrStaircase")
     @BeanMapping(ignoreByDefault = true)
     Flat createFlat(FlatDto dto);
 

@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,5 +27,5 @@ public class BuildingDto extends BaseDto<Long> {
     private Integer numberStoreys;
     private Integer flatsPerStorey;
     private Integer staircase;
-    private Set<FlatDto> flats;
+    private List<FlatDto> flats;
 }

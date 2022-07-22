@@ -39,7 +39,6 @@ public class User extends BaseEntity<Long> {
     private Role role;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private Contract contract;
 
 }

@@ -5,12 +5,12 @@ import com.app.housing_association.contract.entity.Contract;
 import com.app.housing_association.contract.repository.ContractRepository;
 import com.app.housing_association.fee.entity.model.DataForCalculationFee;
 import com.app.housing_association.fee.service.FeeService;
-import com.app.housing_association.flat.entity.Flat;
 import com.app.housing_association.flat.service.FlatService;
 import com.app.housing_association.user.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static com.app.housing_association.common.utils.IValidation.*;
 import static java.util.Objects.isNull;
 
 @Service
@@ -36,20 +36,21 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
     @Override
     public Contract save(Contract contract) {
         if(isNull(contract.getUser()) ){
-            throw new IllegalArgumentException("Contract must have user id");
+            throw new IllegalArgumentException(USER_NULL_VALIDATION);
         }
-        System.out.println();
         if(isNull(contract.getFlat())){
-            throw new IllegalArgumentException("Contract must have flat id");
+            throw new IllegalArgumentException(FLAT_NULL_VALIDATION);
         }
         if(flatService.hasContract(contract.getFlat())){
-            throw new IllegalArgumentException("Flat has still active contract");
+            throw new IllegalArgumentException(CONTRACT_FLAT_VALIDATION);
         }
         if(userService.canNotHaveContract(contract.getUser())){
-            throw new IllegalArgumentException("User has still active contract");
+            throw new IllegalArgumentException(CONTRACT_USER_VALIDATION);
         }
+        var savedUser = userService.save(contract.getUser());
         var savedFee = feeService.calculateAndSaveFeeByData(createDataForCalculationFee(contract));
         contract.setFee(savedFee);
+        contract.setUser(savedUser);
         return contractRepository.save(contract);
     }
 
@@ -65,9 +66,6 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
     }
 
     private Integer getFlat(Long flatId){
-        return flatService
-                .findById(flatId)
-                .map(Flat::getAreaM2)
-                .orElseThrow(()-> new IllegalArgumentException("Provide flat id:" + flatId+" not exist"));
+        return flatService.getAreaById(flatId);
     }
 }

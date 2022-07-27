@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+import static com.app.housing_association.common.utils.IValidation.*;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
@@ -28,12 +29,20 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
     @Override
     public boolean hasContract(Flat flat) {
         if (isNull(flat)) {
-            throw new IllegalArgumentException("Flat cannot be null");
+            throw new IllegalArgumentException(FLAT_NULL_VALIDATION);
         }
         return flatRepository
                 .findById(flat.getId())
                 .map(foundFlat -> nonNull(foundFlat.getContract()))
                 .orElse(false);
+    }
+
+    @Override
+    public Integer getAreaById(Long id) {
+        return flatRepository
+                .findById(id)
+                .map(Flat::getAreaM2)
+                .orElseThrow(()-> new IllegalArgumentException(FLAT_NOT_EXIST+": "+id));
     }
 
     @Override
@@ -44,22 +53,21 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
 
     private void validateDataFlat(Flat input) {
         if (Objects.isNull(input)) {
-            throw new IllegalArgumentException("Data input Flat cannot be null");
+            throw new IllegalArgumentException(FLAT_DATA_NULL);
         }
         if (Objects.isNull(input.getBuilding())) {
-            throw new IllegalArgumentException("Flat building cannot be null");
+            throw new IllegalArgumentException(FLAT_BUILDING_NULL);
         }
         Long buildingId = input.getBuilding().getId();
         if (Objects.isNull(buildingId)) {
-            throw new IllegalArgumentException("Building id from flat cannot be null");
+            throw new IllegalArgumentException(FLAT_ID_BUILDING_NULL);
         }
         var foundBuilding = buildingService.findById(buildingId);
         if (foundBuilding.isEmpty()) {
-            throw new IllegalArgumentException("Building with provide id not exist");
+            throw new IllegalArgumentException(FLAT_ID_BUILDING_NOT_EXIST);
         }
         if (canFlatBeAddedToBuilding(foundBuilding.get(), input)) {
-            throw new IllegalArgumentException("Due to constructional reasons, the apartment cannot be added to the " +
-                    "building or the place is already occupied");
+            throw new IllegalArgumentException(FLAT_CAN_NOT_BE_ADD_TO_BUILDING);
         }
     }
 

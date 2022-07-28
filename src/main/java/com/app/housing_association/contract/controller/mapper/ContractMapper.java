@@ -13,8 +13,6 @@ import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.entity.User;
 import org.mapstruct.*;
 
-import java.util.Collections;
-
 @Mapper(componentModel = "spring")
 public interface ContractMapper extends GenericMapper<Contract, ContractDto, Long> {
 
@@ -35,6 +33,9 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     ContractDto toDto(Contract entity);
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "role", target = "role")

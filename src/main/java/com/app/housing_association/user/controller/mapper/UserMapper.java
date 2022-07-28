@@ -8,15 +8,15 @@ import com.app.housing_association.fee.entity.Fee;
 import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.entity.User;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper extends GenericMapper<User,UserDto,Long> {
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "password", target = "password")
@@ -30,6 +30,9 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     UserDto toDto(User entity);
 
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "password", target = "password")
@@ -37,11 +40,7 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     UserDto toRegisteredDto(User entity);
 
 
-    @Mapping(source = "id", target = "id")
-    @Mapping(source = "username", target = "username")
-    @Mapping(source = "email", target = "email")
-    @Mapping(source = "password", target = "password")
-    @Mapping(source = "role", target = "role")
+    @InheritConfiguration(name = "toDto")
     @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     UserContractDto toUserContractDto(User user);

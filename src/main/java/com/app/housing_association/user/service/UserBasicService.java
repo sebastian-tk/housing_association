@@ -44,6 +44,9 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
             throw new IllegalArgumentException(USER_NULL_VALIDATION);
         }
         User createdUser = new User();
+        createdUser.setFirstname(user.getFirstname());
+        createdUser.setLastname(user.getLastname());
+        createdUser.setPhoneNumber(user.getPhoneNumber());
         createdUser.setUsername(user.getUsername());
         createdUser.setEmail(user.getEmail());
         createdUser.setRole(USER);

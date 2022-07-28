@@ -6,9 +6,13 @@ public interface IValidation {
     //                  MESSAGES
     //*******************************************************
     String USER_NULL_VALIDATION ="User cannot be null";
+    String USER_FIRSTNAME_VALIDATION ="Firstname cannot be null or blank";
+    String USER_LASTNAME_VALIDATION ="Lastname cannot be null or blank";
+    String USER_PHONE_NUMBER_VALIDATION ="Phone number cannot be null or blank";
     String USER_USERNAME_BLANK ="User's username cannot be null or blank";
     String USER_EMAIL_BLANK="User's email cannot be blank or null";
     String USER_EMAIL_SYNTAX_ERROR = "Incorrect syntax of the email address";
+    String USER_PHONE_SYNTAX_ERROR = "Incorrect syntax of the phone number";
     String PASSWORD_NULL_VALIDATION ="Password cannot be blank or null";
 
 
@@ -35,5 +39,6 @@ public interface IValidation {
     //*******************************************************
     String USER_EMAIL_VALIDATION_REGEXP="^([a-z0-9]+)(.[a-z0-9]+)?@([a-z]+).([a-z]{2,3})$";
     String BUILDING_NUMBER_VALIDATION_REGEXP="^[0-9]{1,3}(/[0-9]{1,3})?$";
+    String PHONE_NUMBER_VALIDATION_REGEXP="^[0-9]{3}-[0-9]{3}-[0-9]{3}$";
 
 }

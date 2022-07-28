@@ -8,6 +8,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class AdminRegistrationData {
+
+    private String firstname;
+    private String lastname;
+    private String phoneNumber;
     private String username;
     private String email;
     private String password;

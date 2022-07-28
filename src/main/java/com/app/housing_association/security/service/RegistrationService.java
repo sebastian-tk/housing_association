@@ -31,6 +31,9 @@ public class RegistrationService {
             throw new IllegalArgumentException(REGISTRATION_ACCOUNT_EXIST);
         }
         User user = new User();
+        user.setFirstname(adminRegistrationData.getFirstname());
+        user.setLastname(adminRegistrationData.getLastname());
+        user.setPhoneNumber(adminRegistrationData.getPhoneNumber());
         user.setUsername(adminRegistrationData.getUsername());
         user.setEmail(adminRegistrationData.getEmail());
         user.setPassword(passwordUtils.encryptPassword(adminRegistrationData.getPassword()));

@@ -15,6 +15,10 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserContractDto extends BaseDto<Long> {
+
+    private String firstname;
+    private String lastname;
+    private String phoneNumber;
     private String username;
     private String email;
     private String password;

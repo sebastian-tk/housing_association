@@ -11,6 +11,6 @@ import java.util.List;
 public interface BuildingRepository extends JpaRepository<Building, Long> {
 
     @Override
-    @EntityGraph(attributePaths = {"flats"})
+    @EntityGraph(type = EntityGraph.EntityGraphType.FETCH, attributePaths = {"flats"})
     List<Building> findAll();
 }

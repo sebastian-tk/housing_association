@@ -7,8 +7,6 @@ import com.app.housing_association.flat.controller.mapper.FlatMapper;
 import com.app.housing_association.flat.controller.mapper.FlatMapperImpl;
 import com.app.housing_association.flat.entity.Flat;
 import com.app.housing_association.flat.service.FlatService;
-import com.app.housing_association.user.controller.mapper.UserMapper;
-import com.app.housing_association.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

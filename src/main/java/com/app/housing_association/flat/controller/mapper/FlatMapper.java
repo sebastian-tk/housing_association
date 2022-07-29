@@ -23,7 +23,7 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
     @Mapping(source = "number", target = "number")
     @Mapping(source = "nrStaircase", target = "nrStaircase")
     @Mapping(source = "areaM2", target = "areaM2")
-    @Mapping(source = "typeUse", target = "typeUse")
+    @Mapping(source = "available", target = "available")
     @Mapping(source = "building", target = "building")
     @BeanMapping(ignoreByDefault = true)
     @Override
@@ -49,7 +49,7 @@ public interface FlatMapper extends GenericMapper<Flat, FlatDto, Long> {
     @Mapping(source = "number", target = "number")
     @Mapping(source = "nrStaircase", target = "nrStaircase")
     @Mapping(source = "areaM2", target = "areaM2")
-    @Mapping(source = "typeUse", target = "typeUse")
+    @Mapping(source = "available", target = "available")
     @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     FlatContractDto toFlatContractDto(Flat entity);

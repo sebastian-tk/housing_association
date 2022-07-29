@@ -7,7 +7,9 @@ import com.app.housing_association.flat.entity.Flat;
 import com.app.housing_association.flat.repository.FlatRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static com.app.housing_association.common.utils.IValidation.*;
 import static java.util.Objects.isNull;
@@ -49,6 +51,12 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
     public Flat save(Flat inputFlat) {
         validateDataFlat(inputFlat);
         return super.save(inputFlat);
+    }
+
+    @Override
+    public Optional<List<Flat>> findByAvailableIsTrue() {
+         var flats = flatRepository.findByAvailableIsTrue();
+         return flats.isEmpty() ? Optional.empty() : Optional.of(flats);
     }
 
     private void validateDataFlat(Flat input) {

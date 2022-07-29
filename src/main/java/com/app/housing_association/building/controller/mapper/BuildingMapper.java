@@ -39,7 +39,7 @@ public interface BuildingMapper extends GenericMapper<Building, BuildingDto, Lon
     @Mapping(source = "storey", target = "storey")
     @Mapping(source = "number", target = "number")
     @Mapping(source = "areaM2", target = "areaM2")
-    @Mapping(source = "typeUse", target = "typeUse")
+    @Mapping(source = "available", target = "available")
     @Mapping(source = "nrStaircase", target = "nrStaircase")
     @BeanMapping(ignoreByDefault = true)
     Flat createFlat(FlatDto dto);

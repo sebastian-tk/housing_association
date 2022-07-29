@@ -3,7 +3,6 @@ package com.app.housing_association.flat.controller.dto;
 import com.app.housing_association.building.controller.dto.BuildingDto;
 import com.app.housing_association.common.model.BaseDto;
 import com.app.housing_association.contract.controller.dto.ContractDto;
-import com.app.housing_association.flat.entity.enums.TypeUse;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +20,7 @@ public class FlatContractDto extends BaseDto<Long> {
     private Integer number;
     private Integer nrStaircase;
     private Integer areaM2;
-    private TypeUse typeUse;
+    private boolean available;
     private BuildingDto building;
     private ContractDto contract;
 }

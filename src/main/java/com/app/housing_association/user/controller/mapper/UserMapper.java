@@ -7,7 +7,9 @@ import com.app.housing_association.fee.controller.dto.FeeDto;
 import com.app.housing_association.fee.entity.Fee;
 import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
+import com.app.housing_association.user.controller.dto.UserWithChangingPasswordDto;
 import com.app.housing_association.user.entity.User;
+import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
@@ -73,5 +75,16 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @BeanMapping(ignoreByDefault = true)
     FeeDto toFeeDto(Fee fee);
 
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "password", target = "password")
+    @Mapping(source = "newPassword", target = "newPassword")
+    @BeanMapping(ignoreByDefault = true)
+    UserWithChangingPassword toEntityWithChangingPassword(UserWithChangingPasswordDto dto);
 
 }

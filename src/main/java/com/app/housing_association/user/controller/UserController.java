@@ -2,6 +2,7 @@ package com.app.housing_association.user.controller;
 
 import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
+import com.app.housing_association.user.controller.dto.UserWithChangingPasswordDto;
 import com.app.housing_association.user.controller.mapper.UserMapper;
 import com.app.housing_association.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -104,6 +105,18 @@ public class UserController {
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Void> updateWithCheckedPassword(@PathVariable Long id, @RequestBody UserWithChangingPasswordDto input) {
+        input.setId(id);
+        return service
+                .findById(id)
+                .map(entity -> mapper.toEntityWithChangingPassword(input))
+                .flatMap(service::updateWithChangePassword)
+                .map(dto -> new ResponseEntity<Void>(HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 
     /**
      * Method takes id of U object to remove from URL as parameter then removes object with require id

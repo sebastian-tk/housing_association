@@ -13,7 +13,12 @@ public interface IValidation {
     String USER_EMAIL_BLANK="User's email cannot be blank or null";
     String USER_EMAIL_SYNTAX_ERROR = "Incorrect syntax of the email address";
     String USER_PHONE_SYNTAX_ERROR = "Incorrect syntax of the phone number";
-    String PASSWORD_NULL_VALIDATION ="Password cannot be blank or null";
+    String USER_PASSWORD_NULL_VALIDATION ="Password cannot be blank or null";
+    String USER_ID_VALIDATION="Provide ID cannot be null";
+    String USER_OLD_PASSWORD_VALIDATION="Provide current password cannot be null";
+    String USER_NEW_PASSWORD_VALIDATION="Provide new password cannot be null";
+    String USER_PASSWORD_CORRECT="Provide password is not correct";
+
 
 
     String CONTRACT_FLAT_VALIDATION ="Flat has still active contract";
@@ -31,7 +36,10 @@ public interface IValidation {
     String REGISTRATION_NULL_VALIDATION = "Data to registration cannot be null";
     String REGISTRATION_ACCOUNT_EXIST = "Account already exist";
 
-
+    String FAULT_TITLE_VALIDATION = "Title in fault cannot be null or empty";
+    String FAULT_DESCRIPTION_VALIDATION = "Description in fault cannot be null or empty";
+    String FAULT_IMAGE_PATH_VALIDATION = "Image path in fault cannot be null or empty";
+    String FAULT_BUILDING_VALIDATION = "Building in fault cannot be null";
 
 
     //*******************************************************

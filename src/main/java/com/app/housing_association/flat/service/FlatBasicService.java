@@ -50,7 +50,7 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
     @Override
     public Flat save(Flat inputFlat) {
         validateDataFlat(inputFlat);
-        return super.save(inputFlat);
+        return flatRepository.save(inputFlat);
     }
 
     @Override

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -13,6 +14,16 @@ import static java.util.stream.Collectors.joining;
 
 @ControllerAdvice()
 public class ControllerExceptionHandler {
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  public ResponseEntity<ErrorMessage> sqlException(IllegalArgumentException ex) {
+    return new ResponseEntity<>(
+            new ErrorMessage(
+                    ex.getMessage(),
+                    HttpStatus.BAD_REQUEST.value()),
+            HttpStatus.BAD_REQUEST);
+  }
 
   @ExceptionHandler(DataIntegrityViolationException.class)
   public ResponseEntity<ErrorMessage> sqlException(DataIntegrityViolationException ex) {

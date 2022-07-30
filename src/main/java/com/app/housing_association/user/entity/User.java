@@ -41,7 +41,7 @@ public class User extends BaseEntity<Long> {
     @NotBlank(message = USER_EMAIL_BLANK)
     private String email;
 
-    @NotBlank(message = PASSWORD_NULL_VALIDATION)
+    @NotBlank(message = USER_PASSWORD_NULL_VALIDATION)
     private String password;
 
     @NotNull()

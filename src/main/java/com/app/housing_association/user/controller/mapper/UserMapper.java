@@ -39,8 +39,13 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @BeanMapping(ignoreByDefault = true)
     UserDto toRegisteredDto(User entity);
 
-
-    @InheritConfiguration(name = "toDto")
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "password", target = "password")
     @Mapping(source = "contract", target = "contract")
     @BeanMapping(ignoreByDefault = true)
     UserContractDto toUserContractDto(User user);

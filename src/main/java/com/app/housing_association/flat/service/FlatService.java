@@ -1,6 +1,6 @@
 package com.app.housing_association.flat.service;
 
-import com.app.housing_association.common.service.CrudService;
+import com.app.housing_association.common.service.abstracts.CrudService;
 import com.app.housing_association.flat.entity.Flat;
 
 import java.util.List;

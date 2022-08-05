@@ -1,6 +1,6 @@
 package com.app.housing_association.user.service;
 
-import com.app.housing_association.common.service.AbstractCrudService;
+import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.security.utils.PasswordUtils;
 import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.entity.model.UserWithChangingPassword;

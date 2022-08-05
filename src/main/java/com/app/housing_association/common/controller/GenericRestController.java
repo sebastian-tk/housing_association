@@ -4,7 +4,7 @@ package com.app.housing_association.common.controller;
 import com.app.housing_association.common.controller.mapper.GenericMapper;
 import com.app.housing_association.common.model.BaseDto;
 import com.app.housing_association.common.model.BaseEntity;
-import com.app.housing_association.common.service.CrudService;
+import com.app.housing_association.common.service.abstracts.CrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

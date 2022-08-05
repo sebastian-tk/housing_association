@@ -1,6 +1,6 @@
 package com.app.housing_association.fee.service;
 
-import com.app.housing_association.common.service.AbstractCrudService;
+import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.contract.entity.enums.ContractType;
 import com.app.housing_association.fee.entity.Fee;
 import com.app.housing_association.fee.entity.model.DataForCalculationFee;

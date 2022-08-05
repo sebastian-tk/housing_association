@@ -1,6 +1,6 @@
 package com.app.housing_association.rate.service;
 
-import com.app.housing_association.common.service.AbstractCrudService;
+import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.rate.entity.Rate;
 import com.app.housing_association.rate.repository.RateRepository;
 import org.springframework.stereotype.Service;

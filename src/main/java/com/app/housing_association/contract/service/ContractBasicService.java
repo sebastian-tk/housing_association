@@ -1,6 +1,6 @@
 package com.app.housing_association.contract.service;
 
-import com.app.housing_association.common.service.AbstractCrudService;
+import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.contract.entity.Contract;
 import com.app.housing_association.contract.repository.ContractRepository;
 import com.app.housing_association.fee.entity.model.DataForCalculationFee;

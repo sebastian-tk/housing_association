@@ -1,4 +1,4 @@
-package com.app.housing_association.common.service;
+package com.app.housing_association.common.service.abstracts;
 
 import java.util.List;
 import java.util.Optional;

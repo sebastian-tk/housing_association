@@ -15,47 +15,59 @@ import static java.util.stream.Collectors.joining;
 @ControllerAdvice()
 public class ControllerExceptionHandler {
 
-  @ExceptionHandler(IllegalArgumentException.class)
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-  public ResponseEntity<ErrorMessage> sqlException(IllegalArgumentException ex) {
-    return new ResponseEntity<>(
-            new ErrorMessage(
-                    ex.getMessage(),
-                    HttpStatus.BAD_REQUEST.value()),
-            HttpStatus.BAD_REQUEST);
-  }
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorMessage> sqlException(IllegalStateException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(
+                        ex.getMessage(),
+                        HttpStatus.BAD_REQUEST.value()),
+                HttpStatus.BAD_REQUEST);
+    }
 
-  @ExceptionHandler(DataIntegrityViolationException.class)
-  public ResponseEntity<ErrorMessage> sqlException(DataIntegrityViolationException ex) {
-    return new ResponseEntity<>(
-        new ErrorMessage(
-            ex
-              .getCause()
-              .getCause()
-              .getLocalizedMessage(),
-            HttpStatus.INTERNAL_SERVER_ERROR.value()),
-        HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorMessage> sqlException(IllegalArgumentException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(
+                        ex.getMessage(),
+                        HttpStatus.BAD_REQUEST.value()),
+                HttpStatus.BAD_REQUEST);
+    }
 
-  @ExceptionHandler(RuntimeException.class)
-  public ResponseEntity<ErrorMessage> globalException(RuntimeException ex) {
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorMessage> sqlException(DataIntegrityViolationException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(
+                        ex
+                                .getCause()
+                                .getCause()
+                                .getLocalizedMessage(),
+                        HttpStatus.INTERNAL_SERVER_ERROR.value()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-    return new ResponseEntity<>(
-        new ErrorMessage(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value()),
-        HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorMessage> globalException(RuntimeException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-  @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<ErrorMessage> constraintViolationException(
-      ConstraintViolationException ex) {
-    return new ResponseEntity<>(
-        new ErrorMessage(
-            ex
-                .getConstraintViolations()
-                .stream()
-                .map(ConstraintViolation::getMessageTemplate)
-                .collect(joining(" ")),
-            HttpStatus.INTERNAL_SERVER_ERROR.value()),
-        HttpStatus.INTERNAL_SERVER_ERROR);
-  }
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ErrorMessage> constraintViolationException(
+            ConstraintViolationException ex) {
+        return new ResponseEntity<>(
+                new ErrorMessage(
+                        ex
+                                .getConstraintViolations()
+                                .stream()
+                                .map(ConstraintViolation::getMessageTemplate)
+                                .collect(joining(" ")),
+                        HttpStatus.INTERNAL_SERVER_ERROR.value()),
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

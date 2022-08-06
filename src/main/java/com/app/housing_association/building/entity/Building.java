@@ -1,6 +1,7 @@
 package com.app.housing_association.building.entity;
 
 import com.app.housing_association.common.model.BaseEntity;
+import com.app.housing_association.fault.entity.Fault;
 import com.app.housing_association.flat.entity.Flat;
 import com.sun.istack.NotNull;
 import lombok.Getter;
@@ -74,12 +75,28 @@ public class Building extends BaseEntity<Long> {
     )
     private List<Flat> flats = new ArrayList<>();
 
+    @OneToMany(
+            mappedBy = "building",
+            cascade = CascadeType.ALL
+    )
+    private List<Fault> faults = new ArrayList<>();
+
     public void setFlats(final List<Flat> flats) {
         this.flats.clear();
         flats.forEach(flat -> {
             if(!this.flats.contains(flat)){
                 flat.setBuilding(this);
                 this.flats.add(flat);
+            }
+        });
+    }
+
+    public void setFaults(final List<Fault> faults) {
+        this.faults.clear();
+        faults.forEach(fault -> {
+            if(!this.faults.contains(fault)){
+                fault.setBuilding(this);
+                this.faults.add(fault);
             }
         });
     }

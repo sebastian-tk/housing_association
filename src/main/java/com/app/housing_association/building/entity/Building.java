@@ -3,6 +3,7 @@ package com.app.housing_association.building.entity;
 import com.app.housing_association.common.model.BaseEntity;
 import com.app.housing_association.fault.entity.Fault;
 import com.app.housing_association.flat.entity.Flat;
+import com.app.housing_association.notice.entity.Notice;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.app.housing_association.common.utils.IValidation.BUILDING_NUMBER_VALIDATION_REGEXP;
 
@@ -79,7 +82,13 @@ public class Building extends BaseEntity<Long> {
             mappedBy = "building",
             cascade = CascadeType.ALL
     )
-    private List<Fault> faults = new ArrayList<>();
+    private Set<Fault> faults = new HashSet<>();
+
+    @OneToMany(
+            mappedBy = "building",
+            cascade = CascadeType.ALL
+    )
+    private Set<Notice> notices = new HashSet<>();
 
     public void setFlats(final List<Flat> flats) {
         this.flats.clear();
@@ -91,12 +100,22 @@ public class Building extends BaseEntity<Long> {
         });
     }
 
-    public void setFaults(final List<Fault> faults) {
+    public void setFaults(final Set<Fault> faults) {
         this.faults.clear();
         faults.forEach(fault -> {
             if(!this.faults.contains(fault)){
                 fault.setBuilding(this);
                 this.faults.add(fault);
+            }
+        });
+    }
+
+    public void setNotices(final Set<Notice> notices) {
+        this.notices.clear();
+        notices.forEach(notice -> {
+            if(!this.notices.contains(notice)){
+                notice.setBuilding(this);
+                this.notices.add(notice);
             }
         });
     }

@@ -31,6 +31,10 @@ public interface IValidation {
     String IMAGE_SAVE_ERROR = "Error saving image with id: {}";
     String IMAGE_REMOVE_ERROR = "Error removing image with path: {}";
 
+    String NOTICE_TITLE_NULL = "Notice title cannot be null";
+    String NOTICE_DESCRIPTION_NULL = "Notice description cannot be null";
+
+
     String USER_NULL_VALIDATION ="User cannot be null";
     String USER_FIRSTNAME_VALIDATION ="Firstname cannot be null or blank";
     String USER_LASTNAME_VALIDATION ="Lastname cannot be null or blank";

@@ -4,6 +4,7 @@ import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.controller.dto.UserWithChangingPasswordDto;
 import com.app.housing_association.user.controller.mapper.UserMapper;
+import com.app.housing_association.user.entity.enums.Role;
 import com.app.housing_association.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,10 +43,10 @@ public class UserController {
      * @return ResponseEntity object with List which contains all U objects
      */
     @GetMapping()
-    public ResponseEntity<List<UserDto>> getAll() {
+    public ResponseEntity<List<UserDto>> getAll(@RequestParam(required = false) Role role) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service
-                        .findAll()
+                        .findAllByRoleOrAll(role)
                         .stream()
                         .map(mapper::toDto)
                         .collect(toList()));
@@ -60,10 +61,10 @@ public class UserController {
      * @return ResponseEntity with U object with id equals input id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserContractDto> getById(@PathVariable Long id) {
+    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
         return service
                 .findById(id)
-                .map(mapper::toUserContractDto)
+                .map(mapper::toDto)
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -3,17 +3,19 @@ package com.app.housing_association.user.service;
 import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.security.utils.PasswordUtils;
 import com.app.housing_association.user.entity.User;
+import com.app.housing_association.user.entity.enums.Role;
 import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import com.app.housing_association.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.app.housing_association.common.utils.IValidation.*;
 import static com.app.housing_association.user.entity.enums.Role.USER;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static org.apache.logging.log4j.util.Strings.*;
+import static org.apache.logging.log4j.util.Strings.isBlank;
 
 @Service
 public class UserBasicService extends AbstractCrudService<User, Long> implements UserService {
@@ -40,6 +42,13 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
                 .findById(user.getId())
                 .map(foundUser -> nonNull(foundUser.getContract()))
                 .orElse(false);
+    }
+
+    @Override
+    public List<User> findAllByRoleOrAll(Role role) {
+        return isNull(role)
+                ? userRepository.findAll()
+                : userRepository.findAllByRole(role);
     }
 
     @Override

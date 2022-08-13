@@ -56,6 +56,15 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
         return contractRepository.save(contract);
     }
 
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        contractRepository
+                .findById(id)
+                .map(this::prepareToRemove)
+                .ifPresent(contractRepository::delete);
+    }
+
     private DataForCalculationFee createDataForCalculationFee(Contract contract) {
         return DataForCalculationFee
                 .builder()
@@ -69,5 +78,14 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
 
     private Integer getFlat(Long flatId){
         return flatService.getAreaById(flatId);
+    }
+
+    private Contract prepareToRemove(Contract contract){
+        contract.getFlat().setAvailable(true);
+        contract.setFlat(null);
+        contract.setUser(null);
+        feeService.delete(contract.getFee().getId());
+        contract.setFee(null);
+        return contract;
     }
 }

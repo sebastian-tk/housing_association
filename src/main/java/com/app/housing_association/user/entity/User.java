@@ -48,7 +48,7 @@ public class User extends BaseEntity<Long> {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user")
     private Contract contract;
 
 }

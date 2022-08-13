@@ -14,6 +14,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
+import static java.util.Objects.nonNull;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,16 +39,13 @@ public class Contract extends BaseEntity<Long> {
    @Column(name = "finish_time")
    private Instant finishTime;
 
-   @OneToOne()
-   @JoinColumn(name = "user_id")
+   @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
    private User user;
 
-   @OneToOne()
-   @JoinColumn(name = "flat_id")
+   @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
    private Flat flat;
 
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "fee_id")
+   @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
    private Fee fee;
 
    @PrePersist
@@ -56,6 +55,8 @@ public class Contract extends BaseEntity<Long> {
 
    @PreRemove
    public void makeFreeFlat() {
-      this.flat.setAvailable(true);
+      if(nonNull(this.flat)){
+         this.flat.setAvailable(true);
+      }
    }
 }

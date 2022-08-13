@@ -68,7 +68,6 @@ public class Fee extends BaseEntity<Long> {
     @Column(precision = 7, scale = 2)
     private BigDecimal total;
 
-    @OneToOne(mappedBy = "fee", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "fee")
     private Contract contract;
 }

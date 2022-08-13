@@ -49,8 +49,10 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
         }
         var savedUser = userService.save(contract.getUser());
         var savedFee = feeService.calculateAndSaveFeeByData(createDataForCalculationFee(contract));
+        var savedFlat = flatService.updateAvailable(contract.getFlat().getId(),false).orElse(null);
         contract.setFee(savedFee);
         contract.setUser(savedUser);
+        contract.setFlat(savedFlat);
         return contractRepository.save(contract);
     }
 

@@ -37,16 +37,11 @@ public class Flat extends BaseEntity<Long> {
     @Column(name = "area_m2")
     private Integer areaM2;
 
-    private boolean available;
+    private Boolean available = true;
 
     @ManyToOne
     private Building building;
 
     @OneToOne(mappedBy = "flat")
     private Contract contract;
-
-    @PostPersist
-    void init(){
-        available = true;
-    }
 }

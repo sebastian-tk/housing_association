@@ -41,6 +41,9 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
 
     @Override
     public Integer getAreaById(Long id) {
+        if (isNull(id)) {
+            throw new IllegalArgumentException(FLAT_ID_NULL);
+        }
         return flatRepository
                 .findById(id)
                 .map(Flat::getAreaM2)
@@ -49,8 +52,25 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
 
     @Override
     public Flat save(Flat inputFlat) {
+        if (isNull(inputFlat)) {
+            throw new IllegalArgumentException(FLAT_NULL_VALIDATION);
+        }
         validateDataFlat(inputFlat);
         return flatRepository.save(inputFlat);
+    }
+
+    @Override
+    public Optional<Flat> updateAvailable(Long id, boolean available) {
+        if (isNull(id)) {
+            throw new IllegalArgumentException(FLAT_ID_NULL);
+        }
+        return flatRepository
+                .findById(id)
+                .map(flat -> {
+                    flat.setAvailable(available);
+                    return flat;
+                })
+                .map(this::save);
     }
 
     @Override

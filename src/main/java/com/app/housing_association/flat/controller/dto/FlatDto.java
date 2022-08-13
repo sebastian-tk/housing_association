@@ -19,6 +19,6 @@ public class FlatDto extends BaseDto<Long> {
     private Integer number;
     private Integer nrStaircase;
     private Integer areaM2;
-    private boolean available;
+    private Boolean available;
     private BuildingDto building;
 }

@@ -52,9 +52,19 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @Mapping(source = "phoneNumber", target = "phoneNumber")
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
-    @Mapping(source = "contract", target = "contract")
+    @Mapping(source = "contract", target = "contract",qualifiedByName ="basicContractMapper")
     @BeanMapping(ignoreByDefault = true)
     UserContractDto toUserContractDto(User user);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "firstname", target = "firstname")
+    @Mapping(source = "lastname", target = "lastname")
+    @Mapping(source = "phoneNumber", target = "phoneNumber")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "contract", target = "contract",qualifiedByName ="fullContractMapper")
+    @BeanMapping(ignoreByDefault = true)
+    UserContractDto toUserContractWithDetailsDto(User user);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "type", target = "type")
@@ -64,6 +74,16 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @Mapping(source = "fee", target = "fee")
     @Mapping(source = "flat", target = "flat")
     @BeanMapping(ignoreByDefault = true)
+    @Named("fullContractMapper")
+    ContractDto toFullContractDto(Contract contract);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "type", target = "type")
+    @Mapping(source = "amountPeople", target = "amountPeople")
+    @Mapping(source = "startTime", target = "startTime")
+    @Mapping(source = "finishTime", target = "finishTime")
+    @BeanMapping(ignoreByDefault = true)
+    @Named("basicContractMapper")
     ContractDto toContractDto(Contract contract);
 
     @Mapping(source = "id", target = "id")

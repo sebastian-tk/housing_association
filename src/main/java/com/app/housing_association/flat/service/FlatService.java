@@ -13,4 +13,6 @@ public interface FlatService extends CrudService<Flat, Long> {
     Integer getAreaById(Long id);
 
     Optional<List<Flat>> findByAvailableIsTrue();
+
+    Optional<Flat> updateAvailable(Long id, boolean available);
 }

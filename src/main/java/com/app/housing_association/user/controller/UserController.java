@@ -27,15 +27,6 @@ public class UserController {
         this.mapper = userMapper;
     }
 
-    @GetMapping("/{id}/contract")
-    public ResponseEntity<UserContractDto> getByIdWithContract(@PathVariable Long id) {
-        return service
-                .findById(id)
-                .map(mapper::toUserContractDto)
-                .map(dto -> ResponseEntity.ok().body(dto))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     /**
      * The method gets all U objects in List then returns object in ResponseEntity and mapping result
      * to URL as endpoint. Object is returns with code 200 ok
@@ -61,10 +52,19 @@ public class UserController {
      * @return ResponseEntity with U object with id equals input id
      */
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+    public ResponseEntity<UserContractDto> getById(@PathVariable Long id) {
         return service
                 .findById(id)
-                .map(mapper::toDto)
+                .map(mapper::toUserContractWithDetailsDto)
+                .map(dto -> ResponseEntity.ok().body(dto))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/contract")
+    public ResponseEntity<UserContractDto> getByIdWithContract(@PathVariable Long id) {
+        return service
+                .findById(id)
+                .map(mapper::toUserContractDto)
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

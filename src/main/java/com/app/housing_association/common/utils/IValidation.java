@@ -9,6 +9,7 @@ public interface IValidation {
     String CONTRACT_USER_VALIDATION ="User has still active contract";
 
     String FLAT_NULL_VALIDATION ="Flat cannot be null";
+    String FLAT_ID_NULL ="Flat ID cannot be null";
     String FLAT_NOT_EXIST = "Provide flat id not exist";
     String FLAT_DATA_NULL = "Data Flat cannot be null";
     String FLAT_BUILDING_NULL = "Flat building cannot be null";

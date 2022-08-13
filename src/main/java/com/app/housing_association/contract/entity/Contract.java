@@ -1,7 +1,7 @@
 package com.app.housing_association.contract.entity;
 
-import com.app.housing_association.contract.entity.enums.ContractType;
 import com.app.housing_association.common.model.BaseEntity;
+import com.app.housing_association.contract.entity.enums.ContractType;
 import com.app.housing_association.fee.entity.Fee;
 import com.app.housing_association.flat.entity.Flat;
 import com.app.housing_association.user.entity.User;
@@ -12,7 +12,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.Instant;
 
 @Getter
@@ -38,11 +37,11 @@ public class Contract extends BaseEntity<Long> {
    @Column(name = "finish_time")
    private Instant finishTime;
 
-   @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+   @OneToOne()
    @JoinColumn(name = "user_id")
    private User user;
 
-   @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+   @OneToOne()
    @JoinColumn(name = "flat_id")
    private Flat flat;
 
@@ -53,5 +52,10 @@ public class Contract extends BaseEntity<Long> {
    @PrePersist
    public void createStartTime() {
       this.startTime = Instant.now();
+   }
+
+   @PreRemove
+   public void makeFreeFlat() {
+      this.flat.setAvailable(true);
    }
 }

@@ -50,8 +50,19 @@ public interface IValidation {
     String USER_NEW_PASSWORD_VALIDATION="Provide new password cannot be null";
     String USER_PASSWORD_CORRECT="Provide password is not correct";
 
+    String PDF_LOG_SAVE_FILE_MESSAGE_ERROR = "PDF: {} with id:{} save filed";
+    String PDF_SIZE_ERROR = "The PDF size is too large, max: %d MB";
+    String PDF_SAVE_ERROR = "Error saving PDF with id: {}";
+    String PDF_REMOVE_ERROR = "Error removing PDF with path: {}";
+    String PDF_READ_ERROR = "Error during read PDF: {} from directory, message: {}";
+
     String REGISTRATION_NULL_VALIDATION = "Data to registration cannot be null";
     String REGISTRATION_ACCOUNT_EXIST = "Account already exist";
+
+    String VOTE_VALIDATION = "Vote cannot be null";
+    String VOTE_TITLE_VALIDATION = "Title in vote cannot be null or empty";
+    String VOTE_DESCRIPTION_VALIDATION = "Description in vote cannot be null or empty";
+
     //*******************************************************
     //                  VALIDATION
     //*******************************************************

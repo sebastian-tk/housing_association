@@ -4,6 +4,7 @@ import com.app.housing_association.common.model.BaseEntity;
 import com.app.housing_association.fault.entity.Fault;
 import com.app.housing_association.flat.entity.Flat;
 import com.app.housing_association.notice.entity.Notice;
+import com.app.housing_association.vote.entity.Vote;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -89,6 +90,9 @@ public class Building extends BaseEntity<Long> {
             cascade = CascadeType.ALL
     )
     private Set<Notice> notices = new HashSet<>();
+
+    @OneToOne(mappedBy = "building")
+    private Vote vote;
 
     public void setFlats(final List<Flat> flats) {
         this.flats.clear();

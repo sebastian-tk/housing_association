@@ -8,6 +8,8 @@ import static com.app.housing_association.common.utils.IValidation.FILE_CREATE_D
 
 public interface FileService {
 
+    String TEMP_PATH = "/temp";
+
     byte[] convertToByte(String path);
 
     String saveFile(MultipartFile file, Long id);

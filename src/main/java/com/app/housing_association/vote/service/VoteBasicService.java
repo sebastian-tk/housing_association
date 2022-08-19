@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,33 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
     @Override
     public List<Vote> findAllOrByFinished(Boolean finished) {
         return isNull(finished) ? voteRepository.findAll() : voteRepository.findAllByFinished(finished);
+    }
+
+    @Override
+    public long updateFinishedStatus() {
+        var votes = updateVotesDates();
+        if (!votes.isEmpty()) {
+            voteRepository.saveAll(updateVotesDates());
+        }
+        return votes.size();
+    }
+
+    private Vote updateArchived(Vote vote) {
+        var currentDate = LocalDate.now();
+        if (currentDate.isAfter(vote.getDateFinish())) {
+            vote.setFinished(true);
+        }
+        return vote;
+    }
+
+    private List<Vote> updateVotesDates() {
+        return voteRepository
+                .findAll()
+                .stream()
+                .filter(vote -> !vote.getFinished())
+                .map(this::updateArchived)
+                .filter(Vote::getFinished)
+                .toList();
     }
 
 

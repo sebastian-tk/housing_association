@@ -16,4 +16,6 @@ public interface VoteService extends CrudService<Vote, Long> {
     byte[] convertFileById(Vote faultDto);
 
     List<Vote> findAllOrByFinished(Boolean finished);
+
+    long updateFinishedStatus();
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class Scheduler {
+public class NoticeScheduler {
 
     private final NoticeService noticeService;
 
-    @Scheduled(cron = "${scheduler.execution.duration}" )
+    @Scheduled(cron = "${notice.scheduler.execution.duration}" )
     public void checkAndChangeArchived(){
         log.info("start moving to the archive");
         var quantityTransferred = noticeService.updateFixed();

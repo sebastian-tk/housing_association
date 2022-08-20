@@ -104,4 +104,14 @@ public class VoteController {
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PutMapping("/{id}/user/{userId}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @PathVariable Long userId, @RequestParam boolean vote) {
+        return service
+                .findById(id)
+                .flatMap(entity -> service.addUserVote(entity, userId, vote))
+                .map(mapper::putToDto)
+                .map(dto -> new ResponseEntity<Void>(HttpStatus.NO_CONTENT))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 }

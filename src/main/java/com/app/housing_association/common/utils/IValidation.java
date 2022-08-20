@@ -46,9 +46,13 @@ public interface IValidation {
     String USER_PHONE_SYNTAX_ERROR = "Incorrect syntax of the phone number";
     String USER_PASSWORD_NULL_VALIDATION ="Password cannot be blank or null";
     String USER_ID_VALIDATION="Provide ID cannot be null";
+    String USER_ID_NOT_EXIST="User with provide id not exist";
     String USER_OLD_PASSWORD_VALIDATION="Provide current password cannot be null";
     String USER_NEW_PASSWORD_VALIDATION="Provide new password cannot be null";
     String USER_PASSWORD_CORRECT="Provide password is not correct";
+    String USER_CANNOT_CAST_VOTE="The user has already voted in this vote";
+    String USER_AND_VOTES_HAVE_DIFFERENT_BUILDING="User building id and voting building id do not match";
+    String USER_WITHOUT_FLAT="User isn't assigned to any flat";
 
     String PDF_LOG_SAVE_FILE_MESSAGE_ERROR = "PDF: {} with id:{} save filed";
     String PDF_SIZE_ERROR = "The PDF size is too large, max: %d MB";

@@ -2,6 +2,7 @@ package com.app.housing_association.vote.service;
 
 import com.app.housing_association.common.service.abstracts.AbstractCrudService;
 import com.app.housing_association.common.service.files.PdfService;
+import com.app.housing_association.user.service.UserService;
 import com.app.housing_association.vote.entity.Vote;
 import com.app.housing_association.vote.repository.VoteRepository;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.app.housing_association.common.service.files.FileService.TEMP_PATH;
-import static com.app.housing_association.common.utils.IValidation.FAULT_VALIDATION;
-import static com.app.housing_association.common.utils.IValidation.VOTE_VALIDATION;
+import static com.app.housing_association.common.utils.IValidation.*;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
@@ -22,11 +22,13 @@ import static java.util.Objects.nonNull;
 public class VoteBasicService extends AbstractCrudService<Vote, Long> implements VoteService {
 
     private final VoteRepository voteRepository;
+    private final UserService userService;
     private final PdfService pdfService;
 
-    public VoteBasicService(VoteRepository voteRepository, PdfService pdfService) {
+    public VoteBasicService(VoteRepository voteRepository, UserService userService, PdfService pdfService) {
         super(voteRepository);
         this.voteRepository = voteRepository;
+        this.userService = userService;
         this.pdfService = pdfService;
     }
 
@@ -65,6 +67,20 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
                 .map(voteRepository::save);
     }
 
+    @Transactional
+    @Override
+    public Optional<Vote> addUserVote(Vote inputVote, Long userId, boolean voteStatus) {
+        if (isNull(inputVote)) {
+            throw new IllegalArgumentException(VOTE_VALIDATION);
+        }
+        if (isNull(userId)) {
+            throw new IllegalArgumentException(USER_ID_VALIDATION);
+        }
+        var user = userService.getByIdToAddVote(userId, inputVote);
+        addVote(inputVote, voteStatus);
+        inputVote.addUser(user);
+        return Optional.of(voteRepository.save(inputVote));
+    }
 
     @Override
     public byte[] convertFileById(Vote vote) {
@@ -106,7 +122,6 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
                 .toList();
     }
 
-
     private byte[] loadPdfFromPath(String path) {
         return pdfService.convertToByte(path);
     }
@@ -116,5 +131,13 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
             return existVote.getFilePath();
         }
         return pdfService.updateFile(file, existVote.getId());
+    }
+
+    private void addVote(Vote vote, boolean userVote) {
+        if (userVote) {
+            vote.addUpVote();
+        } else {
+            vote.addDownVote();
+        }
     }
 }

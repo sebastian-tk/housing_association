@@ -18,4 +18,6 @@ public interface VoteService extends CrudService<Vote, Long> {
     List<Vote> findAllOrByFinished(Boolean finished);
 
     long updateFinishedStatus();
+
+    Optional<Vote> addUserVote(Vote input, Long userId, boolean voteStatus);
 }

@@ -62,6 +62,11 @@ public class Vote extends BaseEntity<Long> {
         });
     }
 
+    public void addUser(User user) {
+        this.users.add(user);
+        user.getVotes().add(this);
+    }
+
     @PreRemove
     public void removeUsers() {
         this.users.forEach(user -> user
@@ -70,4 +75,11 @@ public class Vote extends BaseEntity<Long> {
         this.users.clear();
     }
 
+    public void addUpVote(){
+        this.upVote++;
+    }
+
+    public void addDownVote(){
+        this.downVote++;
+    }
 }

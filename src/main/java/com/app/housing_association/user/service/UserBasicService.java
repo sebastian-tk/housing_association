@@ -6,9 +6,11 @@ import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.entity.enums.Role;
 import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import com.app.housing_association.user.repository.UserRepository;
+import com.app.housing_association.vote.entity.Vote;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static com.app.housing_association.common.utils.IValidation.*;
@@ -21,10 +23,9 @@ import static org.apache.logging.log4j.util.Strings.isBlank;
 public class UserBasicService extends AbstractCrudService<User, Long> implements UserService {
 
     private final UserRepository userRepository;
-
     private final PasswordUtils passwordUtils;
 
-    public UserBasicService(UserRepository userRepository, PasswordUtils passwordUtils) {
+    public UserBasicService(UserRepository userRepository,PasswordUtils passwordUtils) {
         super(userRepository);
         this.userRepository = userRepository;
         this.passwordUtils = passwordUtils;
@@ -49,6 +50,12 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
         return isNull(role)
                 ? userRepository.findAll()
                 : userRepository.findAllByRole(role);
+    }
+
+    @Override
+    public User getByIdToAddVote(Long id, Vote vote) {
+        var user = userRepository.findById(id);
+        return validateUserToAddVote(user, vote);
     }
 
     @Override
@@ -82,8 +89,8 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
         updateBaseFieldsUser(existUser, input);
         existUser.setPassword(
                 nonNull(input.getPassword())
-                ? passwordUtils.encryptPassword(input.getPassword())
-                : existUser.getPassword());
+                        ? passwordUtils.encryptPassword(input.getPassword())
+                        : existUser.getPassword());
         return existUser;
     }
 
@@ -121,5 +128,39 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
     private boolean whetherPasswordsDoNotMatch(String existHash, String password) {
         return !passwordUtils.isMatchesPassword(password, existHash);
     }
+
+    private User validateUserToAddVote(Optional<User> userOptional, Vote vote) {
+        if (userOptional.isEmpty()) {
+            throw new IllegalArgumentException(USER_ID_NOT_EXIST);
+        }
+        var user = userOptional.get();
+        if (didUserCastVote(user, vote.getId())) {
+            throw new IllegalStateException(USER_CANNOT_CAST_VOTE);
+        }
+        if (haveUserAndVoteNotTheSameBuilding(user, vote)) {
+            throw new IllegalStateException(USER_AND_VOTES_HAVE_DIFFERENT_BUILDING);
+        }
+        return user;
+    }
+
+    private boolean didUserCastVote(User user, Long voteId) {
+        return user
+                .getVotes()
+                .stream()
+                .anyMatch(vote -> vote.getId().equals(voteId));
+    }
+
+    private boolean haveUserAndVoteNotTheSameBuilding(User user, Vote vote) {
+        var contract = user.getContract();
+        if (Objects.isNull(contract)) {
+            throw new IllegalStateException(USER_WITHOUT_FLAT);
+        }
+        return !contract
+                .getFlat()
+                .getBuilding()
+                .getId()
+                .equals(vote.getBuilding().getId());
+    }
+
 }
 

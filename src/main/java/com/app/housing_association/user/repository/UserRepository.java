@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @EntityGraph(attributePaths = {"contract"})
+    @EntityGraph(attributePaths = {"contract","contract.flat","contract.fee"})
     @Override
     Optional<User> findById(Long aLong);
 

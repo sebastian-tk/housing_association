@@ -23,12 +23,12 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     @Mapping(source = "finishTime", target = "finishTime")
     @Mapping(source = "user", target = "user")
     @Mapping(source = "flat", target = "flat")
-    @Mapping(source = "fee", target = "fee")
     @BeanMapping(ignoreByDefault = true)
     @Override
     Contract toEntity(ContractDto dto);
 
     @InheritInverseConfiguration(name = "toEntity")
+    @Mapping(source = "fee", target = "fee")
     @Override
     ContractDto toDto(Contract entity);
 
@@ -39,7 +39,6 @@ public interface ContractMapper extends GenericMapper<Contract, ContractDto, Lon
     @Mapping(source = "username", target = "username")
     @Mapping(source = "email", target = "email")
     @Mapping(source = "role", target = "role")
-    @Mapping(source = "password", target = "password")
     @BeanMapping(ignoreByDefault = true)
     User createUser(UserDto dto);
 

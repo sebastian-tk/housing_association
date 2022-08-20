@@ -46,6 +46,18 @@ CREATE TABLE IF NOT EXISTS rates (
     warm_water_per DECIMAL (5,2) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS contracts (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT UNIQUE ,
+    amount_people INTEGER NOT NULL CHECK (amount_people>0),
+    finish_time DATETIME,
+    start_time DATETIME,
+    type ENUM('LEASE_AGREEMENT','OWNERSHIP_AGREEMENT'),
+    flat_id INTEGER,
+    user_id INTEGER,
+    CONSTRAINT FK_ContractFlat FOREIGN KEY (flat_id) REFERENCES flats (id) ON DELETE CASCADE,
+    CONSTRAINT FK_ContractUser FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 CREATE TABLE IF NOT EXISTS fees (
     id INTEGER PRIMARY KEY AUTO_INCREMENT UNIQUE ,
     administration DECIMAL(5,2) NOT NULL,
@@ -57,20 +69,7 @@ CREATE TABLE IF NOT EXISTS fees (
     rubbish DECIMAL(5,2) NOT NULL,
     sewage DECIMAL(5,2) NOT NULL,
     warm_water DECIMAL(5,2) NOT NULL,
-    total DECIMAL(7,2) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS contracts (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT UNIQUE ,
-    amount_people INTEGER NOT NULL CHECK (amount_people>0),
-    finish_time DATETIME,
-    start_time DATETIME,
-    type ENUM('LEASE_AGREEMENT','OWNERSHIP_AGREEMENT'),
-    flat_id INTEGER,
-    user_id INTEGER,
-    fee_id INTEGER,
-
-    CONSTRAINT FK_ContractFlat FOREIGN KEY (flat_id) REFERENCES flats (id) ON DELETE SET NULL,
-    CONSTRAINT FK_ContractUser FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE SET NULL,
-    CONSTRAINT FK_ContractFee FOREIGN KEY (fee_id) REFERENCES fees (id) ON DELETE SET NULL
+    total DECIMAL(7,2) NOT NULL,
+    contract_id INTEGER,
+    CONSTRAINT FK_FeeContract FOREIGN KEY (contract_id) REFERENCES contracts (id) ON DELETE CASCADE
 );

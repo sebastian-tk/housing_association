@@ -48,22 +48,22 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
             throw new IllegalArgumentException(CONTRACT_USER_VALIDATION);
         }
         var savedUser = userService.save(contract.getUser());
-        var savedFee = feeService.calculateAndSaveFeeByData(createDataForCalculationFee(contract));
+        var calculatedFee = feeService.calculateAndSaveFeeByData(createDataForCalculationFee(contract));
         var savedFlat = flatService.updateAvailable(contract.getFlat().getId(),false).orElse(null);
-        contract.setFee(savedFee);
+        contract.setFee(calculatedFee);
         contract.setUser(savedUser);
         contract.setFlat(savedFlat);
         return contractRepository.save(contract);
     }
 
-    @Transactional
+    /*@Transactional
     @Override
     public void delete(Long id) {
         contractRepository
                 .findById(id)
                 .map(this::prepareToRemove)
                 .ifPresent(contractRepository::delete);
-    }
+    }*/
 
     private DataForCalculationFee createDataForCalculationFee(Contract contract) {
         return DataForCalculationFee
@@ -80,12 +80,12 @@ public class ContractBasicService extends AbstractCrudService<Contract, Long> im
         return flatService.getAreaById(flatId);
     }
 
-    private Contract prepareToRemove(Contract contract){
+/*    private Contract prepareToRemove(Contract contract){
         contract.getFlat().setAvailable(true);
         contract.setFlat(null);
         contract.setUser(null);
         feeService.delete(contract.getFee().getId());
         contract.setFee(null);
         return contract;
-    }
+    }*/
 }

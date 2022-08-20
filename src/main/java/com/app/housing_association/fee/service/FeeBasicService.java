@@ -38,7 +38,7 @@ public class FeeBasicService extends AbstractCrudService<Fee, Long> implements F
         if (isNull(data)) {
             throw new IllegalArgumentException("Data for calculation fee can not be null");
         }
-        return feeRepository.save(calculateFeesByData(data));
+        return calculateFeesByData(data);
     }
 
     private Fee calculateFeesByData(DataForCalculationFee data) {

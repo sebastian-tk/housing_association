@@ -14,6 +14,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.Instant;
 
+import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 
 @Getter
@@ -47,8 +48,7 @@ public class Contract extends BaseEntity<Long> {
    @JoinColumn(name = "flat_id")
    private Flat flat;
 
-   @OneToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
-   @JoinColumn(name = "fee_id")
+   @OneToOne(mappedBy = "contract",cascade = {CascadeType.ALL})
    private Fee fee;
 
    @PrePersist
@@ -61,5 +61,17 @@ public class Contract extends BaseEntity<Long> {
       if(nonNull(this.flat)){
          this.flat.setAvailable(true);
       }
+   }
+
+   public void setFee(Fee fee) {
+      if (isNull(fee)) {
+         if (nonNull(this.fee)) {
+            this.fee = null;
+         }
+      }
+      {
+         fee.setContract(this);
+      }
+      this.fee = fee;
    }
 }

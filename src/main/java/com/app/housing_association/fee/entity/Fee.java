@@ -68,6 +68,7 @@ public class Fee extends BaseEntity<Long> {
     @Column(precision = 7, scale = 2)
     private BigDecimal total;
 
-    @OneToOne(mappedBy = "fee")
+    @OneToOne()
+    @JoinColumn(name = "contract_id")
     private Contract contract;
 }

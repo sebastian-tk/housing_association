@@ -25,6 +25,7 @@ public interface IValidation {
     String FAULT_BUILDING_VALIDATION = "Building in fault cannot be null";
     String FAULT_VALIDATION = "Fault cannot be null";
     String FAULT_WITH_ID_NOT_EXIST = "Fault to update not exist with id:";
+    String FAULT_IMAGE_VALIDATION = "Fault image cannot be null";
 
     String FILE_CREATE_DIRECTORY_ERROR = "Error creating directory with path:";
 
@@ -65,6 +66,7 @@ public interface IValidation {
     String REGISTRATION_ACCOUNT_EXIST = "Account already exist";
 
     String VOTE_VALIDATION = "Vote cannot be null";
+    String VOTE_FILE_VALIDATION = "Vote file cannot be null";
     String VOTE_TITLE_VALIDATION = "Title in vote cannot be null or empty";
     String VOTE_DESCRIPTION_VALIDATION = "Description in vote cannot be null or empty";
 

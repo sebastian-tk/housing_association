@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import static com.app.housing_association.common.service.files.FileService.TEMP_PATH;
 import static com.app.housing_association.common.utils.IValidation.*;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
@@ -39,14 +38,13 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
         if (isNull(input)) {
             throw new IllegalArgumentException(VOTE_VALIDATION);
         }
-        input.setFilePath(TEMP_PATH);
-        Vote savedVote = voteRepository.save(input);
-        if (nonNull(file)) {
-            String imageName = pdfService.saveFile(file, savedVote.getId());
-            savedVote.setFilePath(imageName);
-            return voteRepository.save(savedVote);
+        if (isNull(file)) {
+            throw new IllegalArgumentException(VOTE_FILE_VALIDATION);
         }
-        return savedVote;
+        var id = voteRepository.getNextSeriesId();
+        String imageName = pdfService.saveFile(file, id);
+        input.setFilePath(imageName);
+        return voteRepository.save(input);
     }
 
     @Override

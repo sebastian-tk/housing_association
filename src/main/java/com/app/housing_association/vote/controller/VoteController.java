@@ -74,10 +74,10 @@ public class VoteController {
      * @return ResponseEntity with U object which was added
      */
     @PostMapping()
-    public ResponseEntity<VoteDto> create(@RequestPart(DATA_POST_TYPE) VoteDto input, @RequestPart(FILE_POST_TYPE) MultipartFile image) {
+    public ResponseEntity<VoteDto> create(@RequestPart(DATA_POST_TYPE) VoteDto input, @RequestPart(FILE_POST_TYPE) MultipartFile pdf) {
         return Optional.of(input)
                 .map(mapper::toEntity)
-                .map(fault -> service.saveWithFile(fault, image))
+                .map(fault -> service.saveWithFile(fault, pdf))
                 .map(mapper::createToDto)
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseThrow();

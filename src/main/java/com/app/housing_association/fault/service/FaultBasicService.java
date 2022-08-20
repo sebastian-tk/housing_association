@@ -12,13 +12,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.app.housing_association.common.utils.IValidation.FAULT_IMAGE_VALIDATION;
 import static com.app.housing_association.common.utils.IValidation.FAULT_VALIDATION;
 import static java.util.Objects.isNull;
 
 @Service
 public class FaultBasicService extends AbstractCrudService<Fault, Long> implements FaultService {
-
-    private static final String TEMP_PATH = "/temp";
 
     private final FaultRepository faultRepository;
     private final ImageService imageService;
@@ -36,14 +35,13 @@ public class FaultBasicService extends AbstractCrudService<Fault, Long> implemen
         if (isNull(inputFault)) {
             throw new IllegalArgumentException(FAULT_VALIDATION);
         }
-        inputFault.setImagePath(TEMP_PATH);
-        Fault savedFault = faultRepository.save(inputFault);
-        if (Objects.nonNull(image)) {
-            String imageName = imageService.saveFile(image, savedFault.getId());
-            savedFault.setImagePath(imageName);
-            return faultRepository.save(savedFault);
+        if (isNull(image)) {
+            throw new IllegalArgumentException(FAULT_IMAGE_VALIDATION);
         }
-        return savedFault;
+        var id = faultRepository.getNextSeriesId();
+        String imageName = imageService.saveFile(image, id);
+        inputFault.setImagePath(imageName);
+        return faultRepository.save(inputFault);
     }
 
     @Override

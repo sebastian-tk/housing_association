@@ -56,6 +56,7 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
             throw new IllegalArgumentException(FLAT_NULL_VALIDATION);
         }
         validateDataFlat(inputFlat);
+        inputFlat.setAvailable(true);
         return flatRepository.save(inputFlat);
     }
 

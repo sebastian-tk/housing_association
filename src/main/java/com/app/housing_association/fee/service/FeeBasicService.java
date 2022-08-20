@@ -34,7 +34,7 @@ public class FeeBasicService extends AbstractCrudService<Fee, Long> implements F
 
     @Transactional
     @Override
-    public Fee calculateAndSaveFeeByData(DataForCalculationFee data) {
+    public Fee calculateFeeByData(DataForCalculationFee data) {
         if (isNull(data)) {
             throw new IllegalArgumentException("Data for calculation fee can not be null");
         }

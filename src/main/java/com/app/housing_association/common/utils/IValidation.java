@@ -5,6 +5,7 @@ public interface IValidation {
     //*******************************************************
     //                  MESSAGES
     //*******************************************************
+    String CONTRACT_OBJECT_VALIDATION ="Contract cannot be null";
     String CONTRACT_FLAT_VALIDATION ="Flat has still active contract";
     String CONTRACT_USER_VALIDATION ="User has still active contract";
 

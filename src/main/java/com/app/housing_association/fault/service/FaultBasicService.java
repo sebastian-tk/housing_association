@@ -1,7 +1,7 @@
 package com.app.housing_association.fault.service;
 
 import com.app.housing_association.common.service.abstracts.AbstractCrudService;
-import com.app.housing_association.common.service.files.ImageService;
+import com.app.housing_association.common.service.files.ImageServiceAzure;
 import com.app.housing_association.fault.entity.Fault;
 import com.app.housing_association.fault.repository.FaultRepository;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,9 @@ import static java.util.Objects.isNull;
 public class FaultBasicService extends AbstractCrudService<Fault, Long> implements FaultService {
 
     private final FaultRepository faultRepository;
-    private final ImageService imageService;
+    private final ImageServiceAzure imageService;
 
-    public FaultBasicService(FaultRepository faultRepository, ImageService imageService) {
+    public FaultBasicService(FaultRepository faultRepository, ImageServiceAzure imageService) {
         super(faultRepository);
         this.faultRepository = faultRepository;
         this.imageService = imageService;
@@ -39,7 +39,7 @@ public class FaultBasicService extends AbstractCrudService<Fault, Long> implemen
             throw new IllegalArgumentException(FAULT_IMAGE_VALIDATION);
         }
         var id = faultRepository.getNextSeriesId();
-        String imageName = imageService.saveFile(image, id);
+        String imageName = imageService.checkAndSaveFile(image, id);
         inputFault.setImagePath(imageName);
         return faultRepository.save(inputFault);
     }
@@ -88,7 +88,7 @@ public class FaultBasicService extends AbstractCrudService<Fault, Long> implemen
     }
 
     private byte[] loadImageFromPath(String path) {
-        return imageService.convertToByte(path);
+        return imageService.downloadFile(path);
     }
 
     private String updateImage(Fault existFault, MultipartFile image) {

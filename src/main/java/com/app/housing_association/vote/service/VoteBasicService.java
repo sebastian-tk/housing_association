@@ -1,7 +1,7 @@
 package com.app.housing_association.vote.service;
 
 import com.app.housing_association.common.service.abstracts.AbstractCrudService;
-import com.app.housing_association.common.service.files.PdfService;
+import com.app.housing_association.common.service.files.PdfAzureService;
 import com.app.housing_association.user.service.UserService;
 import com.app.housing_association.vote.entity.Vote;
 import com.app.housing_association.vote.repository.VoteRepository;
@@ -22,9 +22,9 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
 
     private final VoteRepository voteRepository;
     private final UserService userService;
-    private final PdfService pdfService;
+    private final PdfAzureService pdfService;
 
-    public VoteBasicService(VoteRepository voteRepository, UserService userService, PdfService pdfService) {
+    public VoteBasicService(VoteRepository voteRepository, UserService userService, PdfAzureService pdfService) {
         super(voteRepository);
         this.voteRepository = voteRepository;
         this.userService = userService;
@@ -42,7 +42,7 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
             throw new IllegalArgumentException(VOTE_FILE_VALIDATION);
         }
         var id = voteRepository.getNextSeriesId();
-        String imageName = pdfService.saveFile(file, id);
+        String imageName = pdfService.checkAndSaveFile(file, id);
         input.setFilePath(imageName);
         return voteRepository.save(input);
     }
@@ -121,7 +121,7 @@ public class VoteBasicService extends AbstractCrudService<Vote, Long> implements
     }
 
     private byte[] loadPdfFromPath(String path) {
-        return pdfService.convertToByte(path);
+        return pdfService.downloadFile(path);
     }
 
     private String updatePdf(Vote existVote, MultipartFile file) {

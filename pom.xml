@@ -23,6 +23,8 @@
         <jjwt.version>0.9.1</jjwt.version>
         <openapi.version>1.6.4</openapi.version>
         <flyway.version>8.5.0</flyway.version>
+        <azure.storage.version>12.13.0</azure.storage.version>
+        <file.utils.version>2.6</file.utils.version>
     </properties>
 
     <dependencies>
@@ -89,6 +91,16 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-mysql</artifactId>
             <version>${flyway.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-storage-blob</artifactId>
+            <version>${azure.storage.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${file.utils.version}</version>
         </dependency>
     </dependencies>
 

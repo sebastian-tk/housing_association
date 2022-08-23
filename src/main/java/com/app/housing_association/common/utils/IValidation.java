@@ -30,9 +30,10 @@ public interface IValidation {
     String FILE_CREATE_DIRECTORY_ERROR = "Error creating directory with path:";
 
     String IMAGE_LOG_SAVE_FILE_MESSAGE_ERROR = "Image: {} with id:{} save filed";
-    String IMAGE_SIZE_ERROR = "The image size is too large";
     String IMAGE_SAVE_ERROR = "Error saving image with id: {}";
     String IMAGE_REMOVE_ERROR = "Error removing image with path: {}";
+
+    String IMAGE_SERVICE_SIZE_ERROR = "The image size is too large, for: {}";
 
     String NOTICE_TITLE_NULL = "Notice title cannot be null";
     String NOTICE_DESCRIPTION_NULL = "Notice description cannot be null";
@@ -57,13 +58,19 @@ public interface IValidation {
     String USER_WITHOUT_FLAT="User isn't assigned to any flat";
 
     String PDF_LOG_SAVE_FILE_MESSAGE_ERROR = "PDF: {} with id:{} save filed";
-    String PDF_SIZE_ERROR = "The PDF size is too large, max: %d MB";
+    String PDF_SERVICE_SIZE_ERROR = "The PDF: {} size is too large, max: {} MB";
     String PDF_SAVE_ERROR = "Error saving PDF with id: {}";
     String PDF_REMOVE_ERROR = "Error removing PDF with path: {}";
     String PDF_READ_ERROR = "Error during read PDF: {} from directory, message: {}";
 
     String REGISTRATION_NULL_VALIDATION = "Data to registration cannot be null";
     String REGISTRATION_ACCOUNT_EXIST = "Account already exist";
+
+    String BLOB_STORAGE_FILE_OR_ID_TO_SAVE_NULL = "File:{} or id:{} to save cannot be null";
+    String BLOB_STORAGE_FILE_ID_TO_SAVE_NULL = "File id cannot be null";
+    String BLOB_STORAGE_SAVE_ERROR = "Error saving file with id: {}";
+    String BLOB_STORAGE_DOWNLOAD_ERROR = "Error download file with filePath: {}";
+
 
     String VOTE_VALIDATION = "Vote cannot be null";
     String VOTE_FILE_VALIDATION = "Vote file cannot be null";

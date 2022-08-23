@@ -1,5 +1,5 @@
-FROM openjdk:16-alpine
+FROM openjdk:17
 WORKDIR ./app
-EXPOSE 8080
+EXPOSE 8081
 ADD ./target/app.jar app.jar
 ENTRYPOINT ["java","-jar","app.jar"]

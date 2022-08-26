@@ -39,7 +39,7 @@ public interface VoteMapper extends GenericMapper<Vote, VoteDto, Long> {
     @Mapping(source = "description", target = "description")
     @Mapping(source = "building", target = "building")
     @BeanMapping(ignoreByDefault = true)
-    VoteDto createToDto(Vote entity);
+    VoteDto toDtoWithBuilding(Vote entity);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "title", target = "title")
@@ -54,6 +54,7 @@ public interface VoteMapper extends GenericMapper<Vote, VoteDto, Long> {
     @Mapping(source = "upVote", target = "upVote")
     @Mapping(source = "downVote", target = "downVote")
     @Mapping(source = "finished", target = "finished")
+    @Mapping(source = "building", target = "building")
     @BeanMapping(ignoreByDefault = true)
     VoteBaseDto toBaseDto(Vote entity);
 

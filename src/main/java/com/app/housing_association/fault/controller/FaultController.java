@@ -42,7 +42,7 @@ public class FaultController {
                 .body(service
                         .findAll()
                         .stream()
-                        .map(mapper::toBaseDtoForAll)
+                        .map(mapper::toBaseDto)
                         .collect(toList()));
     }
 
@@ -52,7 +52,7 @@ public class FaultController {
                 .body(service
                         .findAllWithFixed(fixed)
                         .stream()
-                        .map(mapper::toBaseDto)
+                        .map(mapper::toBaseDtoForAll)
                         .collect(toList()));
     }
 

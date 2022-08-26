@@ -71,7 +71,7 @@ public class FlatBasicService extends AbstractCrudService<Flat, Long> implements
                     flat.setAvailable(available);
                     return flat;
                 })
-                .map(this::save);
+                .map(flatRepository::save);
     }
 
     @Override

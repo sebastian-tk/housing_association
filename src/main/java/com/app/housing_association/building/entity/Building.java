@@ -40,7 +40,7 @@ public class Building extends BaseEntity<Long> {
     private String street;
 
     @NotNull
-    @Pattern(regexp =BUILDING_NUMBER_VALIDATION_REGEXP)
+    @Pattern(regexp = BUILDING_NUMBER_VALIDATION_REGEXP)
     private String number;
 
     @NotBlank
@@ -91,13 +91,16 @@ public class Building extends BaseEntity<Long> {
     )
     private Set<Notice> notices = new HashSet<>();
 
-    @OneToOne(mappedBy = "building")
-    private Vote vote;
+    @OneToMany(
+            mappedBy = "building",
+            cascade = CascadeType.ALL
+    )
+    private Set<Vote> votes = new HashSet<>();
 
     public void setFlats(final List<Flat> flats) {
         this.flats.clear();
         flats.forEach(flat -> {
-            if(!this.flats.contains(flat)){
+            if (!this.flats.contains(flat)) {
                 flat.setBuilding(this);
                 this.flats.add(flat);
             }
@@ -107,7 +110,7 @@ public class Building extends BaseEntity<Long> {
     public void setFaults(final Set<Fault> faults) {
         this.faults.clear();
         faults.forEach(fault -> {
-            if(!this.faults.contains(fault)){
+            if (!this.faults.contains(fault)) {
                 fault.setBuilding(this);
                 this.faults.add(fault);
             }
@@ -117,10 +120,18 @@ public class Building extends BaseEntity<Long> {
     public void setNotices(final Set<Notice> notices) {
         this.notices.clear();
         notices.forEach(notice -> {
-            if(!this.notices.contains(notice)){
+            if (!this.notices.contains(notice)) {
                 notice.setBuilding(this);
                 this.notices.add(notice);
             }
+        });
+    }
+
+    public void setVotes(final Set<Vote> votes) {
+        this.votes.clear();
+        votes.forEach(vote -> {
+            vote.setBuilding(this);
+            this.votes.add(vote);
         });
     }
 }

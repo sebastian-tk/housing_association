@@ -50,8 +50,7 @@ public class Vote extends BaseEntity<Long> {
     @ManyToMany(mappedBy = "votes")
     private Set<User> users = new HashSet<>();
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "building_id")
+    @ManyToOne()
     private Building building;
 
     public void setUsers(Set<User> users) {

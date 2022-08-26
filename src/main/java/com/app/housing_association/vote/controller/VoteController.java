@@ -78,7 +78,7 @@ public class VoteController {
         return Optional.of(input)
                 .map(mapper::toEntity)
                 .map(fault -> service.saveWithFile(fault, pdf))
-                .map(mapper::createToDto)
+                .map(mapper::toDtoWithBuilding)
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseThrow();
     }

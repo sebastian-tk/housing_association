@@ -1,6 +1,7 @@
 package com.app.housing_association.user.service;
 
 import com.app.housing_association.common.service.abstracts.AbstractCrudService;
+import com.app.housing_association.flat.service.FlatService;
 import com.app.housing_association.security.utils.PasswordUtils;
 import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.entity.enums.Role;
@@ -8,6 +9,7 @@ import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import com.app.housing_association.user.repository.UserRepository;
 import com.app.housing_association.vote.entity.Vote;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,11 +26,13 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
 
     private final UserRepository userRepository;
     private final PasswordUtils passwordUtils;
+    private final FlatService flatService;
 
-    public UserBasicService(UserRepository userRepository,PasswordUtils passwordUtils) {
+    public UserBasicService(UserRepository userRepository, PasswordUtils passwordUtils, FlatService flatService) {
         super(userRepository);
         this.userRepository = userRepository;
         this.passwordUtils = passwordUtils;
+        this.flatService = flatService;
     }
 
     @Override
@@ -83,6 +87,24 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
         user.setRole(USER);
         user.setPassword(passwordUtils.encryptPassword(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    @Transactional
+    @Override
+    public void delete(Long id) {
+        setFreeFlats(id);
+        super.delete(id);
+    }
+
+    private void setFreeFlats(Long id) {
+        userRepository
+                .findById(id)
+                .ifPresent(user -> {
+                    var contract = user.getContract();
+                    if (nonNull(contract)) {
+                        flatService.updateAvailable(contract.getFlat().getId(), true);
+                    }
+                });
     }
 
     private User updateUser(User existUser, User input) {

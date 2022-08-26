@@ -31,7 +31,7 @@ public class VoteController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<VoteBaseDto>> getAllWithFixed(@RequestParam(required = false) Boolean finished) {
+    public ResponseEntity<List<VoteBaseDto>> getAllWithFinishedStatus(@RequestParam(required = false) Boolean finished) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service
                         .findAllOrByFinished(finished)

@@ -1,5 +1,6 @@
 package com.app.housing_association.security.model;
 
+import com.app.housing_association.user.entity.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,6 @@ import lombok.Setter;
 public class LoggedUser {
     private Long id;
     private String username;
-    private String email;
+    private Role role;
     private String token;
 }

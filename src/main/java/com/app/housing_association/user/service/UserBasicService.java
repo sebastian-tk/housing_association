@@ -5,6 +5,7 @@ import com.app.housing_association.flat.service.FlatService;
 import com.app.housing_association.security.utils.PasswordUtils;
 import com.app.housing_association.user.entity.User;
 import com.app.housing_association.user.entity.enums.Role;
+import com.app.housing_association.user.entity.model.UserWithBuilding;
 import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import com.app.housing_association.user.repository.UserRepository;
 import com.app.housing_association.vote.entity.Vote;
@@ -61,6 +62,14 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
         var user = userRepository.findById(id);
         return validateUserToAddVote(user, vote);
     }
+
+    @Override
+    public Optional<UserWithBuilding> getUsersBuildingId(Long id) {
+        return userRepository
+                .findById(id)
+                .map(user -> new UserWithBuilding(user,getUsersBuildingId(user)));
+    }
+
 
     @Override
     public Optional<User> update(User input) {
@@ -182,6 +191,14 @@ public class UserBasicService extends AbstractCrudService<User, Long> implements
                 .getBuilding()
                 .getId()
                 .equals(vote.getBuilding().getId());
+    }
+
+    private Long getUsersBuildingId(User user){
+        return user
+                .getContract()
+                .getFlat()
+                .getBuilding()
+                .getId();
     }
 
 }

@@ -9,10 +9,12 @@ import com.app.housing_association.fee.controller.dto.FeeDto;
 import com.app.housing_association.fee.entity.Fee;
 import com.app.housing_association.flat.controller.dto.FlatDto;
 import com.app.housing_association.flat.entity.Flat;
+import com.app.housing_association.user.controller.dto.UserBuildingDto;
 import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.controller.dto.UserWithChangingPasswordDto;
 import com.app.housing_association.user.entity.User;
+import com.app.housing_association.user.entity.model.UserWithBuilding;
 import com.app.housing_association.user.entity.model.UserWithChangingPassword;
 import org.mapstruct.*;
 
@@ -36,6 +38,12 @@ public interface UserMapper extends GenericMapper<User,UserDto,Long> {
     @BeanMapping(ignoreByDefault = true)
     @Override
     UserDto toDto(User entity);
+
+    @Mapping(source = "id", target = "id")
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "buildingId", target = "buildingId")
+    @BeanMapping(ignoreByDefault = true)
+    UserBuildingDto toUserBuildingDto(UserWithBuilding entity);
 
     @Mapping(source = "id", target = "id")
     @Mapping(source = "firstname", target = "firstname")

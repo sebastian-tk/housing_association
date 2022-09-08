@@ -1,5 +1,6 @@
 package com.app.housing_association.user.controller;
 
+import com.app.housing_association.user.controller.dto.UserBuildingDto;
 import com.app.housing_association.user.controller.dto.UserContractDto;
 import com.app.housing_association.user.controller.dto.UserDto;
 import com.app.housing_association.user.controller.dto.UserWithChangingPasswordDto;
@@ -65,6 +66,15 @@ public class UserController {
         return service
                 .findById(id)
                 .map(mapper::toUserContractDto)
+                .map(dto -> ResponseEntity.ok().body(dto))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/building")
+    public ResponseEntity<UserBuildingDto> getUsersBuildingId(@PathVariable Long id) {
+        return service
+                .getUsersBuildingId(id)
+                .map(mapper::toUserBuildingDto)
                 .map(dto -> ResponseEntity.ok().body(dto))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
